@@ -37,9 +37,12 @@ void Uart_Send_Recive(void){
 */
 
 
-   	 if ( HAL_UART_Receive(&huart1, pData_Receive,1,10000) == HAL_OK ){
+   	 if ( HAL_UART_Receive(&huart1, pData_Receive,2,10000) == HAL_OK ){
+   		 LedOn();
+
    		 TFT9341_String( 10 ,134, (char*)"                   ");
    		 TFT9341_String( 10 ,134, (char*)pData_Receive);
+
 
    	 } else {
    		 TFT9341_String( 10 ,134, (char*)"                   ");
@@ -54,12 +57,16 @@ void Uart_Send_Recive(void){
     	};
 */
      if ( HAL_UART_Receive(&huart1, pData_Receive,1,10000) == HAL_OK ){
-     TFT9341_String( 10 ,154, (char*)"                   ");
-     TFT9341_String( 10 ,154, (char*)pData_Receive);
+
+    	 LedOn();
+
+    	 TFT9341_String( 10 ,154, (char*)"                   ");
+    	 TFT9341_String( 10 ,154, (char*)pData_Receive);
      } else {
     	 TFT9341_String( 10 ,154, (char*)"                   ");
     	 TFT9341_String( 10 ,154, (char*)"      FALSE      ");
      }
+   	 delay_Led_off(Delay);
 
     }
 }
