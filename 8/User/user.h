@@ -36,6 +36,9 @@ void LedOn(void);
 void LedOff(void);
 void delay_Led_on( uint32_t );
 void delay_Led_off( uint32_t );
+void zeroing_string(char *);
+
+
 
 extern SPI_HandleTypeDef hspi5;
 //extern RNG_HandleTypeDef hrng;

@@ -23,23 +23,26 @@ void transmitUSART_Transmit (void){
 
 
 void Uart_Send_Recive(void){
-    uint8_t pData_Receive[16] =  "1234567891234567";
+    char pData_Receive[] =  "1234567891234567";
 
     uint32_t Delay = 1000 ;
 
     while (1){
-/*
+
    	 delay_Led_on(Delay);
-   	if ( HAL_UART_Receive( &huart1, pData_Receive, 16, 10000) == HAL_OK ){
-   		TFT9341_String( 10 ,154, (char*)"                   ");
-        TFT9341_String( 10 ,154, (char*)pData_Receive);
+   	if ( HAL_UART_Transmit( &huart1, (uint8_t*)pData_Receive, 16, 10000) == HAL_OK ){
+   		TFT9341_String( 10 ,134, (char*)"                   ");
+        TFT9341_String( 10 ,134, (char*)pData_Receive);
    	};
-*/
 
+    zeroing_string(pData_Receive);
 
-   	 if ( HAL_UART_Receive(&huart1, pData_Receive,1,10000) == HAL_OK ){
+   	 if ( HAL_UART_Receive(&huart1, (uint8_t*)pData_Receive,2,10000) == HAL_OK ){
+   		 LedOn();
+
    		 TFT9341_String( 10 ,134, (char*)"                   ");
    		 TFT9341_String( 10 ,134, (char*)pData_Receive);
+
 
    	 } else {
    		 TFT9341_String( 10 ,134, (char*)"                   ");
@@ -53,13 +56,17 @@ void Uart_Send_Recive(void){
         TFT9341_String( 10 ,154, (char*)pData_Receive);
     	};
 */
-     if ( HAL_UART_Receive(&huart1, pData_Receive,1,10000) == HAL_OK ){
-     TFT9341_String( 10 ,154, (char*)"                   ");
-     TFT9341_String( 10 ,154, (char*)pData_Receive);
+     if ( HAL_UART_Receive(&huart1, (uint8_t*)pData_Receive,1,10000) == HAL_OK ){
+
+    	 LedOn();
+
+    	 TFT9341_String( 10 ,154, (char*)"                   ");
+    	 TFT9341_String( 10 ,154, (char*)pData_Receive);
      } else {
     	 TFT9341_String( 10 ,154, (char*)"                   ");
     	 TFT9341_String( 10 ,154, (char*)"      FALSE      ");
      }
+   	 delay_Led_off(Delay);
 
     }
 }

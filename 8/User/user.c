@@ -452,7 +452,7 @@ void print_num(uint32_t num ){
 	//char buffer2[32];
 
 	sprintf(buffer, "%10d", (int)num);
-	TFT9341_String( 10, 146, buffer );
+	TFT9341_String( 10, 154, buffer );
 
 
 };
@@ -486,7 +486,14 @@ void delay_Led_on( uint32_t Delay ) {
   	}
 }
 
+void zeroing_string(char *pData){
 
+	while (*pData){
+
+		pData[0] = " ";
+		pData++ ;
+	}
+}
 
 void start(void)
 {
