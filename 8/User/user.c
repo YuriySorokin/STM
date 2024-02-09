@@ -544,4 +544,24 @@ void start(void)
 
 }
 
+void Dispaly_init(void){
+
+	  TFT9341_ini(240, 320);
+	  TFT9341_FontsIni();
+	  //TFT9341_FillScreen(TFT9341_GREEN);
+	  TFT9341_FillScreen(TFT9341_BLACK);
+	  TFT9341_SetRotation( 1 );
+
+}
+void Start_2(){
+
+	// init display
+	Display_init();
+
+	// print menu
+	// choose menu
+	// make job  - send
+	//			- receive
+
+}
 
