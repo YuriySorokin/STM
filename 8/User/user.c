@@ -490,7 +490,7 @@ void zeroing_string(char *pData){
 
 	while (*pData){
 
-		pData[0] = " ";
+		pData[0] = (uint32_t )" ";
 		pData++ ;
 	}
 }
