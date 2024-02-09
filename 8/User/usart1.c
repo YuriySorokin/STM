@@ -24,7 +24,7 @@ void transmitUSART_Transmit (void){
 
 void Uart_Send_Recive(void){
     char pData_Receive[] =  "1234567891234567";
-
+    char pData_Transmit[] =  "123_DMA_45678912";
     uint32_t Delay = 1000 ;
 
     while (1){
@@ -34,6 +34,14 @@ void Uart_Send_Recive(void){
    		TFT9341_String( 10 ,134, (char*)"                   ");
         TFT9341_String( 10 ,134, (char*)pData_Receive);
    	};
+
+   	// transmit use DMA
+
+   	HAL_UART_Transmit_DMA(&huart1, (uint8_t*)pData_Transmit,( sizeof (pData_Transmit)) -1);
+   	Led_red_off(Delay);
+
+
+   	//
 
     zeroing_string(pData_Receive);
 

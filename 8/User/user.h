@@ -37,7 +37,7 @@ void LedOff(void);
 void delay_Led_on( uint32_t );
 void delay_Led_off( uint32_t );
 void zeroing_string(char *);
-
+void Led_red_off(uint32_t );
 
 
 extern SPI_HandleTypeDef hspi5;
