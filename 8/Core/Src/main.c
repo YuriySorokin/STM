@@ -109,7 +109,8 @@ int main(void)
   MX_USB_HOST_Init();
   /* USER CODE BEGIN 2 */
 
-  start();
+  // start();
+ // 	  start2 ();
 
   /* USER CODE END 2 */
 

@@ -553,12 +553,14 @@ void Dispaly_init(void){
 	  TFT9341_SetRotation( 1 );
 
 }
+
 void Start_2(){
 
 	// init display
-	Display_init();
+	//-----> Display_init();
 
 	// print menu
+	//----> Print_Menu();
 	// choose menu
 	// make job  - send
 	//			- receive
