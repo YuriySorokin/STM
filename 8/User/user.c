@@ -565,5 +565,12 @@ void Start_2(){
 	// make job  - send
 	//			- receive
 
+	// разрешение . запрет прерываний (cpsiD)
+	int i = 1;
+	 __asm
+	volatile
+	(
+	"cpsie i"
+	);
 }
 

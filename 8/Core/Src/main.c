@@ -194,7 +194,18 @@ void Error_Handler(void)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
   /* User can add his own implementation to report the HAL error return state */
-  __disable_irq();
+
+	/* Загрузка адреса регистра управления прерываниями в r3. */
+//	   ldr r3, NVIC_INT_CTRL_CONST
+	   /* Загрузка значения регистра управления прерываниями в r2 из
+	      адреса, находящегося в r3. */
+//	   ldr r2, [r3, 0]
+	   /* Номер прерывания находится в младшем байте - очистка всех других бит. */
+//	   uxtb r2, r2
+
+	__disable_irq();
+
+
   while (1)
   {
   }

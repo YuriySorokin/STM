@@ -4,6 +4,9 @@
  *  Created on: 9 февр. 2024 г.
  *      Author: Yuriy
  */
+#include "stm32f4xx_ll_gpio.h"
+#include "stm32f4xx_hal.h"
+#include "menu.h"
 
 typedef struct
 {
@@ -33,28 +36,28 @@ void Switch_MenuScreen(uint8_t step_by_step){
 	switch( step_by_step ){
 
 	     case FRAME_1:
-	     	    	 	 Frame_1(&step_by_step);
+	     	    	 	 Frame_1(step_by_step);
 	     	    	 	 break;
 	     case FRAME_2:
-	    	 	 	 	 Frame_2(&step_by_step);
+	    	 	 	 	 Frame_2(step_by_step);
 	     	    	 	 break;
 	     case FRAME_3:
-	    	 	 	 	 Frame_3(&step_by_step);
+	    	 	 	 	 Frame_3(step_by_step);
 	     	    	 	 break;
 	     case FRAME_4:
-	    	 	 	 	 Frame_4(&step_by_step);
+	    	 	 	 	 Frame_4(step_by_step);
 	     	    	 	 break;
 	     case FRAME_5:
-	    	 	 	 	 Frame_5(&step_by_step);
+	    	 	 	 	 Frame_5(step_by_step);
 	     	    	 	 break;
 	     case FRAME_6:
-	    	 	 	 	 Frame_6(&cstep_by_stepount);
+	    	 	 	 	 Frame_6(step_by_step);
 	     	    	 	 break;
 	     case FRAME_7:
-	    	 	 	 	 Frame_7(&step_by_step);
+	    	 	 	 	 Frame_7(step_by_step);
 	     	    	 	 break;
 	     case FRAME_8:
-	    	 	 	 	 Frame_8(&step_by_step);
+	    	 	 	 	 Frame_8(step_by_step);
 	     	    	 	 break;
 	     default : break ;
 	}
