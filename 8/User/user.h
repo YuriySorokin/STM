@@ -12,6 +12,7 @@
 #include "stm32f4xx_hal.h"
 #include "stm32f4xx_hal_uart.h"
 #include "fonts.h"
+#include "menu.h"
 
 void start(void);
 void TFT9341_ini(uint16_t, uint16_t);
@@ -38,7 +39,10 @@ void delay_Led_on( uint32_t );
 void delay_Led_off( uint32_t );
 void zeroing_string(char *);
 void Led_red_off(uint32_t );
-
+void  Start_2(void);
+void Leds_flash_on_start_led1_led2(void);
+void Display_welcomeScreen(void);
+void print_text_distance(void);
 
 extern SPI_HandleTypeDef hspi5;
 //extern RNG_HandleTypeDef hrng;

@@ -9,6 +9,8 @@
 #include "stm32f4xx_ll_utils.h"
 #include "usart.h"
 #include "usart1.h"
+//#include "fonts.h"
+
 //#include "font24.c"
 //#include "font20.c"
 //#include "font16.c"
@@ -426,18 +428,11 @@ void Print_text(void){
 	    //HAL_Delay(2000);
 	    //TFT9341_FillScreen(TFT9341_BLACK);
 
-	    TFT9341_SetTextColor(TFT9341_WHITE);
-	    TFT9341_SetBackColor(TFT9341_BLACK);
-	    TFT9341_SetFont(&Font16);
-
-	    char str2[] = "   distance";
-
-
-	    TFT9341_String( 10, 114, str2);
 
 	    //TFT9341_String( 10, 134, "   string line number3");
 
 }
+
 void get_num( uint32_t *num ){
 
 	*num = 10 ;
@@ -448,11 +443,11 @@ void get_num( uint32_t *num ){
 
 void print_num(uint32_t num ){
 	//uint32_t num = 0 ;
-	char buffer[32];
+	char buffer[11];
 	//char buffer2[32];
 
 	sprintf(buffer, "%10d", (int)num);
-	TFT9341_String( 10, 154, buffer );
+	TFT9341_String( 130, 114, buffer );
 
 
 };
@@ -505,36 +500,68 @@ void zeroing_string(char *pData){
 	}
 }
 
-void start(void)
-{
-	uint8_t z = 1 ; //, y = 50, x = 0 ;
-	uint32_t distance = 0 ;
-
-	while ( 0 ){
+void Leds_flash_on_start_led1_led2(void){
 
 	LED1_ON();
-	LED2_ON();
-	LL_mDelay(500);
-	//Delay_ms(500000);
-	LED1_OFF();
-	LED2_OFF();
-	//Delay_ms(500000);
-	LL_mDelay(500);
-	z--;
+		LED2_ON();
+		LL_mDelay(500);
+		//Delay_ms(500000);
+		LED1_OFF();
+		LED2_OFF();
+		//Delay_ms(500000);
+		LL_mDelay(500);
 
-	}
-	  TFT9341_ini(240, 320);
-	  TFT9341_FontsIni();
-	  //TFT9341_FillScreen(TFT9341_GREEN);
-	  TFT9341_FillScreen(TFT9341_BLACK);
-	  TFT9341_SetRotation( 1 );
+}
 
-	  Print_text();
+void Display_welcomeScreen(void ){
+
+TFT9341_ini(240, 320);
+TFT9341_FontsIni();
+TFT9341_FillScreen(TFT9341_BLACK);
+TFT9341_SetRotation( 1 );
+
+Print_text();
+
+}
+
+void print_text_distance(void){
+
+	TFT9341_SetTextColor(TFT9341_WHITE);
+    TFT9341_SetBackColor(TFT9341_BLACK);
+    TFT9341_SetFont(&Font16);
+
+    char str2[] = "   distance";
+
+    TFT9341_String( 10, 114, str2);
+}
+
+void Get_Usonic_distance(){
+
+	uint32_t distance =0 ;
+
+
+		print_text_distance();
+
+		start_USonic( &distance );
+		distance = distance*((distance>0) & (distance <90)) ;
+
+		print_num(distance);
+
+}
+
+void start(void)
+{
+
+
+
+	Leds_flash_on_start_led1_led2();
+
+	Display_welcomeScreen();
+
+	Get_Usonic_distance();
 
 	  //while (1){
-		  start_USonic( &distance );
-		  distance = distance*((distance>0) & (distance <90)) ;
-		  print_num(distance);
+
 
 		  //transmitUSART_Transmit();
 	  //}
@@ -566,7 +593,7 @@ void Start_2(){
 	//			- receive
 
 	// разрешение . запрет прерываний (cpsiD)
-	int i = 1;
+	//int i = 1;
 	 __asm
 	volatile
 	(

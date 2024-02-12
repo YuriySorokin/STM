@@ -6,7 +6,9 @@
  */
 #include "stm32f4xx_ll_gpio.h"
 #include "stm32f4xx_hal.h"
+#include "user.h"
 #include "menu.h"
+
 
 typedef struct
 {
@@ -65,7 +67,27 @@ void Switch_MenuScreen(uint8_t step_by_step){
 
 void DrawMenu ( uint8_t count){
 
+  switch (count)
+  {
+  	  case 1: { count++;
+
+  	  } break ;
+
+  	  case 2: { count++; count ++;
+
+  	  } break ;
+  	  default: break ;
+  }
+
+  Start_2();
+
 	/* Frame1
+
+
+
+
+  }
+
 	 *
 	 * print Line1
 	 *	Name: firmware_name, version: firmware_version
