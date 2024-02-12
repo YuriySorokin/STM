@@ -565,7 +565,12 @@ void start(void)
 
 		  //transmitUSART_Transmit();
 	  //}
-	Uart_Send_Recive();
+	while (1){
+		Uart_Receive_IRQ_DMA();
+
+	// Uart_Send_Recive();
+
+	}
 
 
 

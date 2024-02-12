@@ -10,6 +10,8 @@
 
 void transmitUSART_Transmit (void);
 void Uart_Send_Recive(void);
+void Uart_Receive_IRQ_DMA(void);
+void Uart_transmit(char*);
 
 
 #endif /* USART1_H_ */

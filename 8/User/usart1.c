@@ -7,6 +7,7 @@
 
 #include "usart.h"
 #include "user.h"
+#include "usart1.h"
 
 
 
@@ -20,6 +21,41 @@ void transmitUSART_Transmit (void){
     		               // HAL_Delay(100);
     		  }
 }
+
+void Uart_transmit(char *Receive ){
+   // char pData_Transmit[] =  "123_DMA_45678912\r\n";
+
+   	if ( HAL_UART_Transmit( &huart1, (uint8_t*)Receive, 19, 10000) == HAL_OK ){
+
+   		TFT9341_String( 10 ,134, (char*)"       Sended       ");
+        TFT9341_String( 10 ,134, (char*)Receive);
+   	};
+}
+
+
+void Uart_Receive_IRQ_DMA(void){
+    char pData_Receive_DMA_string[21]={0};
+
+
+
+
+	// Включить приём по IRQ DMA USART
+
+  	 TFT9341_String( 10 ,134, (char*)"       wait        ");
+
+  	 if ( HAL_UART_Receive_DMA(&huart1 , (uint8_t*) pData_Receive_DMA_string, 20) == HAL_OK ){
+  		 LedOn();
+
+  		 TFT9341_String( 10 ,134, (char*)"     Received_DMA      ");
+  		 TFT9341_String( 10 ,134, (char*)pData_Receive_DMA_string);
+
+  	 } else {
+  		 TFT9341_String( 10 ,134, (char*)"                   ");
+  		 TFT9341_String( 10 ,134, (char*)"  FALSE_DMA_Receive      ");
+  	 }
+  	Uart_transmit(pData_Receive_DMA_string);
+}
+
 
 
 void Uart_Send_Recive(void){
