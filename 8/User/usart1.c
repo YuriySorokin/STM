@@ -48,12 +48,14 @@ void Uart_Receive_IRQ_DMA(void){
 
   		 TFT9341_String( 10 ,134, (char*)"     Received_DMA      ");
   		 TFT9341_String( 10 ,134, (char*)pData_Receive_DMA_string);
+  		Uart_transmit(pData_Receive_DMA_string);
 
   	 } else {
   		 TFT9341_String( 10 ,134, (char*)"                   ");
   		 TFT9341_String( 10 ,134, (char*)"  FALSE_DMA_Receive      ");
+  		 LedOff();
   	 }
-  	Uart_transmit(pData_Receive_DMA_string);
+
 }
 
 
@@ -84,9 +86,17 @@ void Uart_Send_Recive(void){
 
    	 TFT9341_String( 10 ,134, (char*)"       wait        ");
 
+   //	 HAL_UART_Receive_IT(&huart1, (uint8_t*) pData_Receive_DMA_string, 20);
 
-   	 if ( HAL_UART_Receive_DMA(&huart1 , (uint8_t*) pData_Receive_DMA_string, 20) == HAL_OK ){
+
+   	 //if ( HAL_UART_Receive_DMA(&huart1 , (uint8_t*) pData_Receive_DMA_string, 20) == HAL_OK ){
+
+   	if (HAL_UART_Receive_IT (&huart1, (uint8_t*) pData_Receive_DMA_string, 20) != HAL_BUSY) {
+
+   	// if ( HAL_UART_Receive_IT(&huart1 , (uint8_t*) pData_Receive_DMA_string, 20) == HAL_OK ){
+
    		 LedOn();
+   		while( HAL_UART_Transmit_IT(&huart1, (uint8_t*) pData_Receive_DMA_string, 20) == HAL_BUSY ) {;}
 
    		 TFT9341_String( 10 ,134, (char*)"     Received_DMA      ");
    		 TFT9341_String( 10 ,134, (char*)pData_Receive_DMA_string);
