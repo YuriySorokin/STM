@@ -33,14 +33,11 @@ void TFT9341_SendData(uint8_t );
 void Check_borders_addSpace_symblols(uint32_t, char *);
 //sprintf(buffer, "%10d", (int)num);
 int	sprintf (char *, const char *, ...);
-void LedOn(void);
-void LedOff(void);
-void delay_Led_on( uint32_t );
-void delay_Led_off( uint32_t );
+
 void zeroing_string(char *);
-void Led_red_off(uint32_t );
+
 void  Start_2(void);
-void Leds_flash_on_start_led1_led2(void);
+
 void Display_welcomeScreen(void);
 void print_text_distance(void);
 

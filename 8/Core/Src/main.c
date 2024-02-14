@@ -22,6 +22,7 @@
 #include "dma.h"
 #include "dma2d.h"
 #include "i2c.h"
+#include "rtc.h"
 #include "spi.h"
 #include "tim.h"
 #include "usart.h"
@@ -107,8 +108,9 @@ int main(void)
   MX_TIM1_Init();
   MX_USART1_UART_Init();
   MX_USB_HOST_Init();
+  MX_RTC_Init();
   /* USER CODE BEGIN 2 */
-
+  //HAL_RTC_MspInit( rtcHandle);
    start();
  // 	  start2 ();
   DrawMenu ( 1 );
@@ -151,6 +153,14 @@ void SystemClock_Config(void)
   {
 
   }
+  LL_RCC_LSI_Enable();
+
+   /* Wait till LSI is ready */
+  while(LL_RCC_LSI_IsReady() != 1)
+  {
+
+  }
+  LL_PWR_EnableBkUpAccess();
   LL_RCC_PLL_ConfigDomain_SYS(LL_RCC_PLLSOURCE_HSE, LL_RCC_PLLM_DIV_4, 72, LL_RCC_PLLP_DIV_2);
   LL_RCC_PLL_ConfigDomain_48M(LL_RCC_PLLSOURCE_HSE, LL_RCC_PLLM_DIV_4, 72, LL_RCC_PLLQ_DIV_3);
   LL_RCC_PLL_Enable();
@@ -193,9 +203,10 @@ void SystemClock_Config(void)
   */
 void Error_Handler(void)
 {
+
   /* USER CODE BEGIN Error_Handler_Debug */
   /* User can add his own implementation to report the HAL error return state */
-
+	// ldr r3, NVIC_INT_CTRL_CONST ;
 	/* Загрузка адреса регистра управления прерываниями в r3. */
 //	   ldr r3, NVIC_INT_CTRL_CONST
 	   /* Загрузка значения регистра управления прерываниями в r2 из

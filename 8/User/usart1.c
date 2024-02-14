@@ -4,7 +4,7 @@
  *  Created on: 2 февр. 2024 г.
  *      Author: Yuriy
  */
-
+//#include "stm32f4xx_hal_uart.h"
 #include "usart.h"
 #include "user.h"
 #include "usart1.h"
@@ -24,6 +24,16 @@ void transmitUSART_Transmit (void){
 }
 
 void Uart_transmit(char *Receive ){
+   // char pData_Transmit[] =  "123_DMA_45678912\r\n";
+
+   	if ( HAL_UART_Transmit( &huart1, (uint8_t*)Receive, 19, 10000) == HAL_OK ){
+
+   		TFT9341_String( 10 ,134, (char*)"       Sended       ");
+        TFT9341_String( 10 ,134, (char*)Receive);
+   	};
+}
+
+void Uart_transmit_IT(char *Receive ){
    // char pData_Transmit[] =  "123_DMA_45678912\r\n";
 
    	if ( HAL_UART_Transmit( &huart1, (uint8_t*)Receive, 19, 10000) == HAL_OK ){
@@ -55,7 +65,9 @@ void Uart_Receive_IRQ_DMA(void){
   		 TFT9341_String( 10 ,134, (char*)"     Received_DMA      ");
   		 TFT9341_String( 10 ,134, (char*)pData_Receive_DMA_string);
   		//Uart_transmit(pData_Receive_DMA_string);
-  		 HAL_UART_Transmit_IT(&huart1, (uint8_t*) pData_Receive_DMA_string, 20) == HAL_BUSY  ;
+  		while ( HAL_UART_Transmit_IT(&huart1, (uint8_t*) pData_Receive_DMA_string, 20) == HAL_BUSY  ) {
+
+  		};
   		 D = 0 ;
   	 } else {
   		 TFT9341_String( 10 ,134, (char*)"                   ");
@@ -156,15 +168,16 @@ void Uart_Send_Recive(void){
     }
 }
 
-  HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart) {
+  void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart) {
 
+	  D=2 ;
 
   }
 
 
-  HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
+  void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
 
-	  uint32_t T = 0 ;
+	//  uint32_t T = 0 ;
 
 	  D = 1;
   }
