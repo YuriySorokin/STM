@@ -9,6 +9,7 @@
 #include "user.h"
 #include "usart1.h"
 
+uint32_t D = 0 ;
 
 
 void transmitUSART_Transmit (void){
@@ -41,15 +42,21 @@ void Uart_Receive_IRQ_DMA(void){
 
 	// Включить приём по IRQ DMA USART
 
-  	 TFT9341_String( 10 ,134, (char*)"       wait        ");
+  	 	TFT9341_String( 10 ,134, (char*)"       wait        ");
 
-  	 if ( HAL_UART_Receive_DMA(&huart1 , (uint8_t*) pData_Receive_DMA_string, 20) == HAL_OK ){
-  		 LedOn();
+
+  	 // if ( HAL_UART_Receive_DMA(&huart1 , (uint8_t*) pData_Receive_DMA_string, 20) == HAL_OK ){
+
+  		HAL_UART_Receive_IT (&huart1, (uint8_t*) pData_Receive_DMA_string, 20);
+  		if ( D == 1){
+
+  			LedOn();
 
   		 TFT9341_String( 10 ,134, (char*)"     Received_DMA      ");
   		 TFT9341_String( 10 ,134, (char*)pData_Receive_DMA_string);
-  		Uart_transmit(pData_Receive_DMA_string);
-
+  		//Uart_transmit(pData_Receive_DMA_string);
+  		 HAL_UART_Transmit_IT(&huart1, (uint8_t*) pData_Receive_DMA_string, 20) == HAL_BUSY  ;
+  		 D = 0 ;
   	 } else {
   		 TFT9341_String( 10 ,134, (char*)"                   ");
   		 TFT9341_String( 10 ,134, (char*)"  FALSE_DMA_Receive      ");
@@ -148,3 +155,17 @@ void Uart_Send_Recive(void){
 
     }
 }
+
+  HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart) {
+
+
+  }
+
+
+  HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
+
+	  uint32_t T = 0 ;
+
+	  D = 1;
+  }
+
