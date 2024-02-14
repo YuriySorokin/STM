@@ -38,20 +38,18 @@ void Get_time ( void ) {
 	extern RTC_DateTypeDef sDate;
 
 	HAL_RTC_GetTime(&hrtc, &sTime, RTC_FORMAT_BIN);
+	HAL_RTC_GetDate(&hrtc, &sDate, RTC_FORMAT_BIN);
 
-	sprintf(bufferH, "%2d:", (int)sTime.Hours);
-
+	sprintf(bufferH, "   %2d:", (int)sTime.Hours);
 	print_comm3(bufferH);
 
 	sprintf(bufferM, "%2d:", (int)sTime.Minutes);
-
 	print_comm3(bufferM);
 
-	sprintf(bufferS, "%2d:", (int)sTime.Seconds);
-
+	sprintf(bufferS, "%2d", (int)sTime.Seconds);
 	print_comm3(bufferS);
 
-	  HAL_RTC_GetDate(&hrtc, &sDate, RTC_FORMAT_BIN);
+
 
 
 
