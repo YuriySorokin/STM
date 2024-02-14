@@ -29,15 +29,15 @@ extern "C" {
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
 
-#include "stm32f4xx_ll_rcc.h"
-#include "stm32f4xx_ll_bus.h"
 #include "stm32f4xx_ll_system.h"
+#include "stm32f4xx_ll_gpio.h"
 #include "stm32f4xx_ll_exti.h"
+#include "stm32f4xx_ll_bus.h"
 #include "stm32f4xx_ll_cortex.h"
+#include "stm32f4xx_ll_rcc.h"
 #include "stm32f4xx_ll_utils.h"
 #include "stm32f4xx_ll_pwr.h"
 #include "stm32f4xx_ll_dma.h"
-#include "stm32f4xx_ll_gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -105,8 +105,6 @@ void Error_Handler(void);
 #define NCS_MEMS_SPI_GPIO_Port GPIOC
 #define CS_Pin LL_GPIO_PIN_2
 #define CS_GPIO_Port GPIOC
-#define B1_Pin LL_GPIO_PIN_0
-#define B1_GPIO_Port GPIOA
 #define MEMS_INT1_Pin LL_GPIO_PIN_1
 #define MEMS_INT1_GPIO_Port GPIOA
 #define VSYNC_Pin LL_GPIO_PIN_4
@@ -119,8 +117,6 @@ void Error_Handler(void);
 #define OTG_FS_PSO_GPIO_Port GPIOC
 #define OTG_FS_OC_Pin LL_GPIO_PIN_5
 #define OTG_FS_OC_GPIO_Port GPIOC
-#define R3_Pin LL_GPIO_PIN_0
-#define R3_GPIO_Port GPIOB
 #define R6_Pin LL_GPIO_PIN_1
 #define R6_GPIO_Port GPIOB
 #define BOOT1_Pin LL_GPIO_PIN_2

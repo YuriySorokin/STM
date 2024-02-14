@@ -14,4 +14,7 @@ void Uart_Receive_IRQ_DMA(void);
 void Uart_transmit(char*);
 void Uart_transmit_IT(char * );
 
+
+void print_comm3( char* );
+
 #endif /* USART1_H_ */

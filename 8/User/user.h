@@ -13,6 +13,7 @@
 #include "stm32f4xx_hal_uart.h"
 #include "fonts.h"
 #include "menu.h"
+#include "time.h"
 
 void start(void);
 void TFT9341_ini(uint16_t, uint16_t);

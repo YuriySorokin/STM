@@ -8,6 +8,7 @@
 #include "usart.h"
 #include "user.h"
 #include "usart1.h"
+#include "LED.h"
 
 uint32_t D = 0 ;
 
@@ -43,6 +44,13 @@ void Uart_transmit_IT(char *Receive ){
    	};
 }
 
+void uart_Receive_IT (){
+    char 	pData_Receive_DMA_string[21]={0};
+
+
+    		HAL_UART_Receive_IT (&huart1, (uint8_t*) pData_Receive_DMA_string, 20);
+
+}
 
 void Uart_Receive_IRQ_DMA(void){
     char pData_Receive_DMA_string[21]={0};
@@ -58,6 +66,7 @@ void Uart_Receive_IRQ_DMA(void){
   	 // if ( HAL_UART_Receive_DMA(&huart1 , (uint8_t*) pData_Receive_DMA_string, 20) == HAL_OK ){
 
   		HAL_UART_Receive_IT (&huart1, (uint8_t*) pData_Receive_DMA_string, 20);
+
   		if ( D == 1){
 
   			LedOn();
@@ -65,10 +74,15 @@ void Uart_Receive_IRQ_DMA(void){
   		 TFT9341_String( 10 ,134, (char*)"     Received_DMA      ");
   		 TFT9341_String( 10 ,134, (char*)pData_Receive_DMA_string);
   		//Uart_transmit(pData_Receive_DMA_string);
+  		 /*
   		while ( HAL_UART_Transmit_IT(&huart1, (uint8_t*) pData_Receive_DMA_string, 20) == HAL_BUSY  ) {
 
   		};
+  		*/
+  		HAL_UART_Transmit_IT(&huart1, (uint8_t*) pData_Receive_DMA_string, 20) ;
   		 D = 0 ;
+  		 LedOff();
+
   	 } else {
   		 TFT9341_String( 10 ,134, (char*)"                   ");
   		 TFT9341_String( 10 ,134, (char*)"  FALSE_DMA_Receive      ");
@@ -77,6 +91,23 @@ void Uart_Receive_IRQ_DMA(void){
 
 }
 
+
+void print_comm3( char* buffer ){
+
+	  while(*buffer)
+	  {
+			while ( HAL_UART_Transmit_IT(&huart1, (uint8_t*) buffer, 1) != HAL_OK ) { ;}
+			(void)*buffer++;
+			//HAL_Delay(2);
+
+	  }
+	 // Leds_flash_on_start_led1_led2();
+
+
+
+
+
+}
 
 
 void Uart_Send_Recive(void){
@@ -167,7 +198,7 @@ void Uart_Send_Recive(void){
 
     }
 }
-
+/*
   void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart) {
 
 	  D=2 ;
@@ -181,4 +212,4 @@ void Uart_Send_Recive(void){
 
 	  D = 1;
   }
-
+*/

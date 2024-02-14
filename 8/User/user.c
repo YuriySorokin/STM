@@ -517,13 +517,20 @@ void start(void)
 
 	Get_Usonic_distance();
 
+
+
 	  //while (1){
 
 
 		  //transmitUSART_Transmit();
 	  //}
 	while (1){
-		Uart_Receive_IRQ_DMA();
+
+		// receive only one message
+
+		// wait in circle
+		Get_time ();
+		//Uart_Receive_IRQ_DMA();
 
 	// Uart_Send_Recive();
 
@@ -541,6 +548,12 @@ void Dispaly_init(void){
 	  TFT9341_SetRotation( 1 );
 
 }
+
+
+/*
+ * функция из примера пока не работает
+ * чтение номера прерывания из прерыапния
+ */
 
 void SendString(void)
 {
