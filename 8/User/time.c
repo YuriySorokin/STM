@@ -22,6 +22,7 @@ typedef enum
 */
 
 RTC_TimeTypeDef sTime = {0};
+RTC_DateTypeDef sDate = {0};
 
 void Get_time ( void ) {
 
@@ -34,6 +35,7 @@ void Get_time ( void ) {
 
 	extern RTC_HandleTypeDef hrtc ;
 	extern RTC_TimeTypeDef sTime;
+	extern RTC_DateTypeDef sDate;
 
 	HAL_RTC_GetTime(&hrtc, &sTime, RTC_FORMAT_BIN);
 
@@ -49,11 +51,18 @@ void Get_time ( void ) {
 
 	print_comm3(bufferS);
 
+	  HAL_RTC_GetDate(&hrtc, &sDate, RTC_FORMAT_BIN);
+
 
 
 //	HAL_UART_Transmit_IT(&huart1, (uint8_t*) buffer, 20) ;
 
 
+    // Получить отображение времени
+//extern RTC_TimeTypeDef sTime;
+ //  HAL_RTC_GetTime(&hrtc, &sTime, RTC_FORMAT_BIN);
+
+//
 
 	//printf("%02d:",sTime.Hours);
 	//printf("%02d:",sTime.Minutes);
