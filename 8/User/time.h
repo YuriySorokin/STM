@@ -11,7 +11,9 @@
 
 
 
-void get_Time ( void ) ; // get time and date and print in to comm3
+void get_Time ( char* curTime ) ; // get time and date and print in to comm3
+
+
 void get_Time_to_display (void); // get time and fill global Time
 
 

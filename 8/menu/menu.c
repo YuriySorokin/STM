@@ -8,7 +8,7 @@
 #include "stm32f4xx_hal.h"
 #include "user.h"
 #include "menu.h"
-
+#include "display.h"
 
 typedef struct
 {
@@ -65,6 +65,44 @@ void Switch_MenuScreen(uint8_t step_by_step){
 	}
 }
 
+
+void Frame1(){
+
+	/* Frame1
+	 *
+	 * print Line1
+	 *	Name: firmware_name, version: firmware_version
+	 *
+	 * print Line2
+	 *  Time: Time_current, (+timeZone), data
+	 *
+	 * print line3
+	 * 	H: thickness, [mm]
+	 *
+	 * print line4
+	 * 	Left before  <  pwd  > Right after
+	 *
+	 ** 	1	< Home >	1
+	*/
+	print_Line1(); // x0 y10
+	print_Line2(); // x0 y10 + 24
+	print_Line3(); // x0 y10 + 24 + 24
+	print_Line4(); // x0 y10 + 24 + 24 +24
+}
+
+void 	print_Line1(void);
+void 	print_Line2(void){
+
+	 //* print Line2
+	 //*  Time: Time_current, (+timeZone), data
+	 print_text_Line2();
+
+
+}
+void 	print_Line3(void);
+void 	print_Line4(void);
+
+
 void DrawMenu ( uint8_t count){
 
   switch (count)
@@ -79,12 +117,9 @@ void DrawMenu ( uint8_t count){
   	  default: break ;
   }
 
-  Start_2();
+   // Start_2(); // not used
 
 	/* Frame1
-
-
-
 
   }
 
@@ -104,7 +139,7 @@ void DrawMenu ( uint8_t count){
 	 ** 	1	< Home >	1
 	*/
 
-	/* Frame2
+  	  /* Frame2
 	 *
 	 * print Line1
 	 *	Battery : level [%]

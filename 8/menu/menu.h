@@ -13,6 +13,10 @@ void Frame_5(uint32_t);void Frame_6(uint32_t);void Frame_7(uint32_t);void Frame_
 
 void DrawMenu ( uint8_t );
 
+void 	print_Line1(void);
+void	print_Line2(void);
+void	print_Line3(void);
+void	print_Line4(void);
 
 
 #endif /* MENU_H_ */

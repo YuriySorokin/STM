@@ -12,7 +12,7 @@
 #include "usart.h"
 #include "usart1.h"
 #include  "LED.h"
-
+#include "menu.h"
 
 
 
@@ -531,6 +531,8 @@ void start(void)
 		// wait in circle
 		//Get_time ();
 		get_Time_to_display();
+		print_Line2();
+
 		//Uart_Receive_IRQ_DMA();
 
 	// Uart_Send_Recive();
@@ -572,7 +574,7 @@ void SendString(void)
 }
 
 
-void Start_2(){
+void Start_2(){ // not used
 
 	// init display
 	//-----> Display_init();
