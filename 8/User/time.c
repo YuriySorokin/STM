@@ -60,9 +60,14 @@ void get_Time (char *curTime){
 	sprintf(bufferH, "%2d:%2d:%2d", (int)sTime.Hours, (int)sTime.Minutes, (int)sTime.Seconds);
 	//curTime = bufferH ;
 	while (bufferH[i]){
+		if (bufferH[i] == 32) {
+			curTime[i] = 48 ;
+		} else {
 		curTime[i] = bufferH[i] ;
+		}
 
 		i++;
+
 	}
 }
 
