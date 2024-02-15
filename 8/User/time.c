@@ -24,13 +24,42 @@ typedef enum
 RTC_TimeTypeDef sTime = {0};
 RTC_DateTypeDef sDate = {0};
 
+
+
+void get_Time_to_display (void){
+	char bufferH[] = "        "; // обязательно 8-мь, не меньше, чем сформируется строка
+	char spaces[] = "   ";
+
+
+	extern RTC_HandleTypeDef hrtc ;
+	extern RTC_TimeTypeDef sTime;
+	extern RTC_DateTypeDef sDate;
+
+	HAL_RTC_GetTime(&hrtc, &sTime, RTC_FORMAT_BIN);
+	HAL_RTC_GetDate(&hrtc, &sDate, RTC_FORMAT_BIN);
+
+	print_comm3(spaces);
+
+	sprintf(bufferH, "%2d:%2d:%2d", (int)sTime.Hours, (int)sTime.Minutes, (int)sTime.Seconds);
+	//print_comm3(bufferH);
+
+//	sprintf(bufferM, "%2d:", (int)sTime.Minutes);
+	//print_comm3(bufferM);
+
+//	sprintf(bufferS, "%2d", (int)sTime.Seconds);
+
+	print_comm3(bufferH);
+
+	HAL_Delay(1000);
+}
+
 void Get_time ( void ) {
 
 	//char buffer[11];
 	char bufferH[4];
 	char bufferM[4];
 	char bufferS[4];
-
+	char spaces[] = "   ";
 		//char buffer2[32];
 
 	extern RTC_HandleTypeDef hrtc ;
@@ -40,14 +69,18 @@ void Get_time ( void ) {
 	HAL_RTC_GetTime(&hrtc, &sTime, RTC_FORMAT_BIN);
 	HAL_RTC_GetDate(&hrtc, &sDate, RTC_FORMAT_BIN);
 
-	sprintf(bufferH, "   %2d:", (int)sTime.Hours);
-	print_comm3(bufferH);
+
+//	print_comm3(spaces);
+
+
+	sprintf(bufferH, "%2d:", (int)sTime.Hours);
+//	print_comm3(bufferH);
 
 	sprintf(bufferM, "%2d:", (int)sTime.Minutes);
-	print_comm3(bufferM);
+//	print_comm3(bufferM);
 
 	sprintf(bufferS, "%2d", (int)sTime.Seconds);
-	print_comm3(bufferS);
+//	print_comm3(bufferS);
 
 
 

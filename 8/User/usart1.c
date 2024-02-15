@@ -96,16 +96,13 @@ void print_comm3( char* buffer ){
 
 	  while(*buffer)
 	  {
-			while ( HAL_UART_Transmit_IT(&huart1, (uint8_t*) buffer, 1) != HAL_OK ) { ;}
+			//while ( HAL_UART_Transmit_IT(&huart1, (uint8_t*) buffer, 1) != HAL_OK ) { ;}
+		  while ( HAL_UART_Transmit_DMA(&huart1, (uint8_t*) buffer, 1) != HAL_OK ) { ;}
 			(void)*buffer++;
 			//HAL_Delay(2);
-
+			//HAL_UART_Transmit_DMA
 	  }
 	 // Leds_flash_on_start_led1_led2();
-
-
-
-
 
 }
 

@@ -529,7 +529,8 @@ void start(void)
 		// receive only one message
 
 		// wait in circle
-		Get_time ();
+		//Get_time ();
+		get_Time_to_display();
 		//Uart_Receive_IRQ_DMA();
 
 	// Uart_Send_Recive();
