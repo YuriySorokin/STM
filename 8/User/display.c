@@ -16,14 +16,14 @@ void print_text_Line2(void){
     char curTime[] = "         ";
     char clear[] = "              " ; // 5 + 9
 
-    TFT9341_String( 10, 24, clear);
+    TFT9341_String( 10, 54, clear);
 
     char time[] = "Time:";
-    TFT9341_String( 10, 24, time);
+    TFT9341_String( 10, 54, time);
 
 
     get_Time( (char*)curTime );
-    TFT9341_String( 116, 24, clear);
-    TFT9341_String( 116, 24, curTime);
+    TFT9341_String( 116, 54, clear);
+    TFT9341_String( 116, 54, curTime);
 
 }
