@@ -6,13 +6,14 @@
  */
 #include "time.h"
 #include "user.h"
-char curTime[] = "         ";
+
 
 void print_text_Line2(void){
 
 	TFT9341_SetTextColor(TFT9341_CYAN);
     TFT9341_SetBackColor(TFT9341_BLACK);
     TFT9341_SetFont(&Font24);
+    char curTime[] = "         ";
     char clear[] = "              " ; // 5 + 9
 
     TFT9341_String( 10, 24, clear);
