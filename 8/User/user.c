@@ -13,7 +13,7 @@
 #include "usart1.h"
 #include  "LED.h"
 #include "menu.h"
-
+#include "data.h"
 
 
 //#include "fonts.h"
@@ -532,7 +532,7 @@ void start(void)
 		//Get_time ();
 		get_time_to_comm();
 		print_Line2_F1();
-
+		fill_menu_data();
 		//Uart_Receive_IRQ_DMA();
 
 	// Uart_Send_Recive();

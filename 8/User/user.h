@@ -41,6 +41,10 @@ void  Start_2(void);
 
 void Display_welcomeScreen(void);
 void print_text_distance(void);
+void fill_menu_data (void);
+
+
+
 
 extern SPI_HandleTypeDef hspi5;
 //extern RNG_HandleTypeDef hrng;
