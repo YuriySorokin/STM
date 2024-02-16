@@ -26,7 +26,7 @@ RTC_DateTypeDef sDate = {0};
 
 
 
-void get_Time_to_display (void){
+void get_Time_to_comm3 (void){
 	char bufferH[] = "        "; // обязательно 8-мь, не меньше, чем сформируется строка
 	char spaces[] = "   ";
 
@@ -44,7 +44,7 @@ void get_Time_to_display (void){
 
 	print_comm3(bufferH);
 
-	HAL_Delay(1000);
+//	HAL_Delay(1000);
 }
 
 void get_Time (char *curTime){
