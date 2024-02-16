@@ -67,12 +67,11 @@ void get_Time (char *curTime){
 		}
 
 		i++;
-
 	}
 }
 
 
-void Get_time ( void ) {
+void get_time_to_comm ( void ) { // на экран
 
 	//char buffer[11];
 	char bufferH[4];
@@ -101,24 +100,6 @@ void Get_time ( void ) {
 	sprintf(bufferS, "%2d", (int)sTime.Seconds);
 	print_comm3(bufferS);
 
-
-
-
-
-//	HAL_UART_Transmit_IT(&huart1, (uint8_t*) buffer, 20) ;
-
-
-    // Получить отображение времени
-//extern RTC_TimeTypeDef sTime;
- //  HAL_RTC_GetTime(&hrtc, &sTime, RTC_FORMAT_BIN);
-
-//
-
-	//printf("%02d:",sTime.Hours);
-	//printf("%02d:",sTime.Minutes);
-	//printf("%02d\n",sTime.Seconds);
-
-
-	HAL_Delay(1000);
+//	HAL_Delay(1000);
 
 };

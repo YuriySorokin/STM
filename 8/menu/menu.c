@@ -84,23 +84,37 @@ void Frame1(){
 	 *
 	 ** 	1	< Home >	1
 	*/
-	print_Line1(); // x0 y10
-	print_Line2(); // x0 y10 + 24
-	print_Line3(); // x0 y10 + 24 + 24
-	print_Line4(); // x0 y10 + 24 + 24 +24
+	print_Line1_F1(); // x0 y10
+	print_Line2_F1(); // x0 y10 + 24
+	print_Line3_F1(); // x0 y10 + 24 + 24
+	print_Line4_F1(); // x0 y10 + 24 + 24 +24
 }
 
-void 	print_Line1(void);
-void 	print_Line2(void){
+void 	print_Line1_F1(void){
+	// * print Line1
+	//	 *	Name: firmware_name, version: firmware_version
+	print_text_Line1_F1();
+};
+
+void 	print_Line2_F1(void){
 
 	 //* print Line2
 	 //*  Time: Time_current, (+timeZone), data
-	 print_text_Line2();
-
+	 print_text_Line2_F1();
 
 }
-void 	print_Line3(void);
-void 	print_Line4(void);
+
+void 	print_Line3_F1(void){
+
+	 //* print line3
+	 //* 	H: thickness, [mm]
+	 print_text_Line3_F1();
+
+}
+
+
+
+void 	print_Line4_F1(void);
 
 
 void DrawMenu ( uint8_t count){

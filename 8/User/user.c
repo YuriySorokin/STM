@@ -531,7 +531,7 @@ void start(void)
 		// wait in circle
 		//Get_time ();
 		get_Time_to_display();
-		print_Line2();
+		print_Line2_F1();
 
 		//Uart_Receive_IRQ_DMA();
 
