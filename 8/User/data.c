@@ -24,7 +24,7 @@ void fill_string(uint8_t* destString, uint8_t* string ){
 void fill_menu_data (void){
 
 	uint8_t count_size = 0;
-	uint8_t string[] = "Start";
+	uint8_t string[] = "one";
 
 	Menu_Data Datamenu;
 
@@ -46,18 +46,10 @@ void fill_menu_data (void){
 	Datamenu.pin_num = 1 ;
 	Datamenu.serial_number = 1 ;
 
-	count_size = sizeof ( Datamenu.firmware_name ) ;
-
 	fill_string( Datamenu.firmware_name , string ) ;
 
 	//print_comm3( Datamenu.firmware_name );
 
 	//&Datamenu ;
-
-
-
-
-
-
 
 }
