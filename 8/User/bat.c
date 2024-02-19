@@ -11,9 +11,9 @@
 #include <stdio.h>
 
 
-void battery_metter(float*	batteryVoltage){
+void battery_metter(double *batteryVoltage){
 
-	uint8_t count10 = 10 ;
+	uint8_t count10 = 1 ;
 	float mcuVoltage = 0;
 	uint32_t Timeout = 100 ;
 
@@ -47,7 +47,10 @@ void get_battery_level (char *curTime){
 
 	char buffer[] = "                  "; // обязательно 8-мь, не меньше, чем сформируется строка
 	int i = 0 ;
-	float batteryVoltage = 0 ;
+	//float batteryVoltage = 0 ;
+	double batteryVoltage = 0 ;
+
+
 	//float mcuVoltage = 0;
 
 	//HAL_RTC_GetTime(&hrtc, &sTime, RTC_FORMAT_BIN);
