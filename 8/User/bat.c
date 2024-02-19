@@ -8,7 +8,7 @@
 #include "main.h"
 #include "stm32f4xx_hal_adc_ex.h"
 #include "adc.h"
-
+#include <stdio.h>
 
 
 void battery_metter(float*	batteryVoltage){
@@ -56,7 +56,14 @@ void get_battery_level (char *curTime){
 	 battery_metter( &batteryVoltage);
 
 	//sprintf(bufferH, "%2d:%2d:%2d", (int)sTime.Hours, (int)sTime.Minutes, (int)sTime.Seconds);
-	sprintf(buffer, "%f", (float)batteryVoltage);
+	 sprintf(buffer, "%g", batteryVoltage);
+
+	// замена float
+
+	//sprintf(buffer, "%d.%d",(int)batteryVoltage/10, (int)(batteryVoltage-(batteryVoltage/10)*100000000 ));
+
+	//printf("Result is: %d.%d", i/10, i%10);
+
 	//-u _printf_float
 	//curTime = bufferH ;
 	while (buffer[i]){
