@@ -4,30 +4,27 @@
 int getc_from_file();  
 
 
-int file_open ( FILE* , char*);
+int file_open ( FILE** , char*);
 
 int file_printf ( FILE* , char* );
 
 
-int file_open ( FILE *file , char argv[] ){
+int file_open ( FILE* *file , char argv[] ){
 
 	char str[512] = {'0'};
 
-	if ((file = fopen(argv, "r")) == NULL){
+	if ((*file = fopen(argv, "r")) == NULL){
 							       printf("Не удалось открыть файл");
 										       getchar();
 			
 								   		     	return 1;
 	}
-	      // открыть файл удалось
-	      // требуемые действия над данными
-		printf("файл открыт \n");	
-		
-		printf("вывод строк из файла \n" ) ;
+									printf("файл открыт \n");	
+							     printf("вывод строк из файла \n" ) ;
 	getchar();
 
 		while (
-				fgets(str, 512, file) != NULL 
+				fgets(str, 512, *file) != NULL 
 		)
 
 		{
@@ -36,7 +33,7 @@ int file_open ( FILE *file , char argv[] ){
 
     	getchar();
 
-    	fclose(file);
+    	fclose(*file);
 
 								     printf (" \nFile closed \n");
 
@@ -80,7 +77,7 @@ int main (int argc, char *argv[]){
 	FILE *fp;
 	int i = 0 ;	
 	  
-	  file_open ( fp, argv[1] ) ;
+	  file_open ( &fp, argv[1] ) ;
 
 	  printf (" \nFile opened \n");
 
