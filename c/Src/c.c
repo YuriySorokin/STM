@@ -23,6 +23,8 @@ int file_open ( FILE* *file , char argv[] ){
 							     printf("вывод строк из файла \n" ) ;
 	getchar();
 
+	return 0 ;
+
 		while (
 				fgets(str, 512, *file) != NULL 
 		)
@@ -33,9 +35,9 @@ int file_open ( FILE* *file , char argv[] ){
 
     	getchar();
 
-    	fclose(*file);
+//k    	fclose(*file);
 
-								     printf (" \nFile closed \n");
+//								     printf (" \nFile closed \n");
 
 		return 0 ;
 }
@@ -71,9 +73,10 @@ int file_printf ( FILE *file , char argv[] ){
 
 
 
+
 int main (int argc, char *argv[]){
 
-	char str[512] = {'\n'};
+	char str[512] = {'0'};
 	FILE *fp;
 	int i = 0 ;	
 	  
@@ -81,8 +84,24 @@ int main (int argc, char *argv[]){
 
 	  printf (" \nFile opened \n");
 
+/*	printf("файл открыт \n");	
+		
+		printf("вывод строк из файла \n" ) ;
+		while (
+				fgets(str, 512, fp) != NULL 
+		)
+
+		{
+				 printf("%s\n", str ) ;
+		}
+
+    		getchar();
+*/
+
+		str[i] = fgetc(fp) ;
+
   	  while 	(	((str[i] = fgetc(fp)) != EOF) 
-					&
+					&&
 					( i < 512 )
 				)
 			{
