@@ -509,7 +509,7 @@ void Get_Usonic_distance(){
 void start(void)
 {
 
-	float  battery_value  = 0 ;
+
 
 	Leds_flash_on_start_led1_led2();
 
@@ -534,10 +534,6 @@ void start(void)
 		print_Line2_F1();
 		fill_menu_data();
 		//Uart_Receive_IRQ_DMA();
-
-
-		   battery_metter( &battery_value);
-		   print_Line1_F2();
 
 	// Uart_Send_Recive();
 

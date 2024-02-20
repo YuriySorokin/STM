@@ -14,8 +14,6 @@
 #include "fonts.h"
 #include "menu.h"
 #include "time.h"
-#include "bat.h"
-
 
 void start(void);
 void TFT9341_ini(uint16_t, uint16_t);

@@ -18,7 +18,6 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "adc.h"
 #include "crc.h"
 #include "dma.h"
 #include "dma2d.h"
@@ -110,17 +109,11 @@ int main(void)
   MX_USART1_UART_Init();
   MX_USB_HOST_Init();
   MX_RTC_Init();
-  MX_ADC1_Init();
   /* USER CODE BEGIN 2 */
   //HAL_RTC_MspInit( rtcHandle);
-
-
-
    start();
  // 	  start2 ();
-
-
-   DrawMenu ( 1 );
+  DrawMenu ( 1 );
 
   /* USER CODE END 2 */
 
