@@ -116,14 +116,6 @@ void 	print_Line3_F1(void){
 
 void 	print_Line4_F1(void);
 
-void 	print_Line1_F2(void){
-	// * print Line1
-	//	 *	Name: firmware_name, version: firmware_version
-	print_text_Line1_F2();
-};
-
-
-
 
 void DrawMenu ( uint8_t count){
 
