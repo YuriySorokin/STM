@@ -13,4 +13,6 @@ void print_text_Line2_F1(void);
 void print_text_Line3_F1(void);
 void print_text_Line4_F1(void);
 
+void print_text_Line1_F2(void);
+
 #endif /* DISPLAY_H_ */
