@@ -1,12 +1,27 @@
 #include <stdio.h>
 #include "stdbool.h"
+#include <string.h>
+
+//#define noerror 0 ;
+
+#define L_BUFFER_STRING 512
+
+enum errorNum {
+	noerror = 0,
+	File_open_error = 1
+} ;
+
+int errornum = 0 ;
+
+void press_AnyKey(void); // press any key only
 
 int getc_from_file();  
 
-
-int file_open ( FILE** , char*);
+int file_open ( FILE** , char*); // открытие файла с коммандной строки 1 арг
 
 int file_printf ( FILE* , char* );
+
+
 
 
 int file_open ( FILE* *file , char argv[] ){
@@ -15,16 +30,11 @@ int file_open ( FILE* *file , char argv[] ){
 
 	if ((*file = fopen(argv, "r")) == NULL){
 							       printf("Не удалось открыть файл");
-										       getchar();
-			
-								   		     	return 1;
+											   	return File_open_error;
 	}
-									printf("файл открыт \n");	
-							     printf("вывод строк из файла \n" ) ;
-	getchar();
 
-	return 0 ;
-
+	return noerror ;
+	// проверка открытия файла, выборка строк, если нужна проверка
 		while (
 				fgets(str, 512, *file) != NULL 
 		)
@@ -32,14 +42,12 @@ int file_open ( FILE* *file , char argv[] ){
 		{
 				 printf("%s\n", str ) ;
 		}
+	// закрытие файла		
+    	fclose(*file);
 
-    	getchar();
+								     printf (" \nFile closed \n");
 
-//k    	fclose(*file);
-
-//								     printf (" \nFile closed \n");
-
-		return 0 ;
+		return noerror ;
 }
 
 int file_printf ( FILE *file , char argv[] ){
@@ -72,58 +80,101 @@ int file_printf ( FILE *file , char argv[] ){
 }
 
 
+int get_first_line( FILE *fp , char *in_string ) {
+	char symbol = '0';
+	char str[L_BUFFER_STRING] = {'0'} ;
+	int i = 0 ;
 
-
-int main (int argc, char *argv[]){
-
-	char str[512] = {'0'};
-	FILE *fp;
-	int i = 0 ;	
-	  
-	  file_open ( &fp, argv[1] ) ;
-
-	  printf (" \nFile opened \n");
-
-/*	printf("файл открыт \n");	
-		
-		printf("вывод строк из файла \n" ) ;
-		while (
-				fgets(str, 512, fp) != NULL 
-		)
-
-		{
-				 printf("%s\n", str ) ;
-		}
-
-    		getchar();
-*/
-
-		str[i] = fgetc(fp) ;
-
-  	  while 	(	((str[i] = fgetc(fp)) != EOF) 
-					&&
-					( i < 512 )
+  	  while 	(	(( symbol = fgetc(fp)) != EOF) 
+						&&
+					( symbol != 0x0A)
+						&&
+					( i < L_BUFFER_STRING )
 				)
 			{
-				printf (" str[i] = %s , i = %d", str[i],i);
+				
+				/*
+				str[1] = '\50'; // работает (
+				str[2] = (int) symbol ; // работает m
+				str[3] = symbol ; // работает e
+				*/
 
+				in_string[i] = symbol ;			// работает
+				// printf (" %c  ", symbol ) ; // работает 
+				
+				//printf ("  i = %d , str[%d] = %c  \n", i,i, in_string[i]);
+/*
 				if (str[i] == ',') {
 							str[i] = '\0';
 							printf("%s\n", str);
 			    				i = 0;
 		    				    }
-				    else { i++; } 
-			        }		
+				    else { i++; } */
+					i++ ;
+			}
+
+			// in_string = str ;
+			//printf ("\n instring = %s  ", in_string );
+
+		}
+
+
+int main (int argc, char *argv[]){
+
+
+	FILE *fp;
+	int i = 0 ;	
+
+	char str[512] = {'\0'};
+	char symbol = '\0';
+	  
+	if ( file_open ( &fp, argv[1] ) == noerror );
+{
+		get_first_line( fp , str );
+}
+	printf (" \n 1-st string from file is : \n %s ", str );
+	printf ("\n");
+	
+
+
+return noerror ;
+
+  	  while 	(	(( symbol = fgetc(fp)) != EOF) 
+						&&
+					( i < 512 )
+				)
+			{
+				
+				/*
+				str[1] = '\50'; // работает (
+				str[2] = (int) symbol ; // работает m
+				str[3] = symbol ; // работает e
+				*/
+
+				str[i] = symbol ;			// работает
+				printf (" %c  ", symbol ) ; // работает 
+				
+				printf ("  i = %d , str[%d] = %c  \n", i,i, str[i]);
+				/*
+				if (str[i] == ',') {
+							str[i] = '\0';
+							printf("%s\n", str);
+			    				i = 0;
+		    				    }
+				    else { i++; } */
+					i++ ;
+			}	
+
 	    str[i] = '\0';
 	    printf("%s\n",str);
 	    printf("i=%d\n",i);
 
     	    fclose(fp);
-	    getchar();
+	    press_AnyKey();
 
 //		getc_from_file(); 
 
-	 return 0 ;
+	 return noerror ;
 }
 
 /*
@@ -171,4 +222,7 @@ int getc_from_file(void) {
 }
 
 
-
+void press_AnyKey(void) { // 
+												printf("press anykey");
+		getchar();
+}
