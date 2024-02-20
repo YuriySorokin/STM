@@ -13,6 +13,13 @@ enum errorNum {
 
 int errornum = 0 ;
 
+enum progress {
+	exceeded_L_BUFFER_STRING = 1,
+	reached_EOL = 2,
+	reached_EOF = 3
+
+}
+
 void press_AnyKey(void); // press any key only
 
 int getc_from_file();  
@@ -21,8 +28,8 @@ int file_open ( FILE** , char*); // открытие файла с комман�
 
 int file_printf ( FILE* , char* );
 
-
-
+int get_one_line( FILE * , char * ) ;
+int get_first_line( FILE * , char * ) ;
 
 int file_open ( FILE* *file , char argv[] ){
 
@@ -87,20 +94,20 @@ int get_first_line( FILE *fp , char *in_string ) {
 
   	  while 	(	(( symbol = fgetc(fp)) != EOF) 
 						&&
-					( symbol != 0x0A)
+					( symbol != 0x0A)		// конец строки
 						&&
 					( i < L_BUFFER_STRING )
 				)
 			{
 				
 				/*
-				str[1] = '\50'; // работает (
-				str[2] = (int) symbol ; // работает m
-				str[3] = symbol ; // работает e
+				str[1] = '\50'; 			// работает (
+				str[2] = (int) symbol ; 	// работает m
+				str[3] = symbol ; 			// работает e
 				*/
 
 				in_string[i] = symbol ;			// работает
-				// printf (" %c  ", symbol ) ; // работает 
+				// printf (" %c  ", symbol ) ; 	// работает 
 				
 				//printf ("  i = %d , str[%d] = %c  \n", i,i, in_string[i]);
 /*
@@ -110,7 +117,7 @@ int get_first_line( FILE *fp , char *in_string ) {
 			    				i = 0;
 		    				    }
 				    else { i++; } */
-					i++ ;
+				i++ ;
 			}
 
 			// in_string = str ;
@@ -118,6 +125,42 @@ int get_first_line( FILE *fp , char *in_string ) {
 
 		}
 
+int get_one_line( FILE *fp , char *in_string ) {
+	char symbol = '0';
+	char str[L_BUFFER_STRING] = {'0'} ;
+	int i = 0 ;
+	int res = 0, res1 = 0, res2 = 0, res3 = 0 ; 
+	enum progress STATUS ;
+
+  	  while 	(	(( symbol = fgetc(fp)) != EOF) 
+						&&
+					( symbol != 0x0A)
+						&&
+					( i < L_BUFFER_STRING )
+				)
+			{
+				in_string[i] = symbol ;			// работает
+				i++ ;
+			}
+
+	res1 = i >= L_BUFFER_STRING ;
+	res2 = symbol == 0x0A ;
+	res3 = symbol == EOF ;
+	res = res1 + res2*10 +res3*100 ;
+		
+		switch ( res )
+		{
+			case res1 : { STATUS = exceeded_L_BUFFER_STRING ;
+						}; break ;
+			case res2 : { STATUS = reached_EOL ; 
+						}; break ;
+			case res3 : { STATUS = reached_EOF ;
+						}; break ;
+
+			default :  break ;
+
+		}
+}
 
 int main (int argc, char *argv[]){
 
@@ -128,14 +171,18 @@ int main (int argc, char *argv[]){
 	char str[512] = {'\0'};
 	char symbol = '\0';
 	  
-	if ( file_open ( &fp, argv[1] ) == noerror );
+	if ( file_open( &fp, argv[1] ) == noerror );
 {
 		get_first_line( fp , str );
 }
 	printf (" \n 1-st string from file is : \n %s ", str );
 	printf ("\n");
 	
+		get_one_line( fp, str ) ;
 
+	printf (" \n next string from file is : \n %s ", str );
+	printf ("\n");
+	
 
 return noerror ;
 

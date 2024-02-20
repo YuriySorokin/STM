@@ -1,0 +1,4 @@
+DAC5675AEVM
+EVAL MODULE FOR DAC5675 48439rub
+https://www.ti.com/tool/DAC5675AEVM
+
