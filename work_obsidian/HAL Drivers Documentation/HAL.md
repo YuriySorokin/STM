@@ -1,0 +1,1 @@
+https://stm32l4-libraries-documentation.readthedocs.io/en/latest/group__UART__Private__Functions.html#ga2a1ae97205ef555dbcbeac5d530da21b

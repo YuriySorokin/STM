@@ -1,0 +1,190 @@
+{
+  "main": {
+    "id": "f16ef90b803b66f1",
+    "type": "split",
+    "children": [
+      {
+        "id": "41bb89d804672d2c",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "feafa6325043c62e",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Исключения в си/исключения в СИ.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "f01a617726293421",
+    "type": "split",
+    "children": [
+      {
+        "id": "d004bef4e23ed827",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "3f1d8d99a3460e79",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "016e2333a1ab61a6",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "95957e7a00637815",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "53924ccb7a08b9d3",
+    "type": "split",
+    "children": [
+      {
+        "id": "89abcea6ef2b6e50",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "76a1e17657c4bb82",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Исключения в си/исключения в СИ.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "947c0661915cd654",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Исключения в си/исключения в СИ.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "4de0d731cb9d4f86",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "5df5c1c60dc25fb0",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Исключения в си/исключения в СИ.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Меню быстрого перехода": false,
+      "graph:Граф": false,
+      "canvas:Создать новый холст": false,
+      "daily-notes:Сегодняшняя заметка": false,
+      "templates:Вставить шаблон": false,
+      "command-palette:Открыть палитру команд": false
+    }
+  },
+  "active": "feafa6325043c62e",
+  "lastOpenFiles": [
+    "VIM/клавиши.md",
+    "Исключения в си/исключения в СИ.md",
+    "Исключения в си",
+    "CSV/parse real.md",
+    "FLOAT/FLOAT.md",
+    "Begin/начало.md",
+    "FLOAT",
+    "ASM/FPU.md",
+    "Begin",
+    "GIT/GIT init.md",
+    "GIT/difftool.md",
+    "GIT/Настройки log GIT.md",
+    "CSV/parce in C.md",
+    "UART.md",
+    "CSV/parse CSV.md",
+    "Без названия.md",
+    "УДТ-40.md",
+    "CSV",
+    "Теория толщиномер",
+    "Закуп/debug.md",
+    "Закуп/ace+9736-DPG 26-01.md",
+    "CubeIDE/добавление новых папок в проект.md",
+    "Закуп/генератор.md",
+    "вывод на экран/Форматированный вывод на экран.md",
+    "RTC F4/RTC.md",
+    "обработка прерывания IRQ/Default_Handler.md",
+    "sysdm.cpl.md",
+    "перенос TEMP",
+    "printf stm32f4.md",
+    "printf",
+    "RTC F4",
+    "HAL Drivers Documentation/HAL.md",
+    "HAL Drivers Documentation",
+    "Закуп/Pasted image 20240126153156.png",
+    "LOG_FS/miniFS.md",
+    "IRQ/CAN прерывания и обработка ошибок.md",
+    "LOG_FS",
+    "Без названия.canvas"
+  ]
+}

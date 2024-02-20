@@ -1,0 +1,1 @@
+http://we.easyelectronics.ru/STM32/primenenie-printf-v-stm32f4.html
