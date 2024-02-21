@@ -2,15 +2,18 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
+#include <stdarg.h>
 
 //#define noerror 0 ;
+#define DEBUG
 
 #define L_BUFFER_STRING 512
 #define EOL 0x0A 
 
 enum errorNum {
 	noerror = 0,
-	File_open_error = 1
+	File_open_error = 1,
+	NULL_pointer = 2
 } ;
 
 int errornum = 0 ;
@@ -25,29 +28,30 @@ enum progress {
 } ;
 
 struct point {
-	int index ;
-	float time ;
+	// int index ;
+	float time ;				
 	float ch1_V ;
 	// float time_increment ;
 } ;
 
+struct vector_point {
+	int index ;
+	struct point member;
+	struct vector_point *prev_point; 
+	struct vector_point *next_point;
+} ;
 
 void press_AnyKey(void); // press any key only
 
 
 
 int getc_from_file();  
-
 int file_open ( FILE** , char*); // открытие файла с коммандной строки 1 арг
-
 int file_printf ( FILE* , char* );
-
 int get_first_line( FILE * , char * ) ;
 int get_next_line( FILE * , char * ) ;
 int csv_parse_string( char *, struct point *  ) ;
 int get_col ( char *, char, float *, float * );
-
-
 
 
 int file_open ( FILE* *file , char argv[] ){
@@ -207,14 +211,11 @@ int main (int argc, char *argv[]){
 	printf (" \n next string from file is : \n %s ", str );
 	printf ("\n");
 
-	char separator = ',' ;
 	struct point _Point ;
-	//float value32 = 7.1635E-06;
 
-		//_Point.time = value32 ;
-		//_Point.ch1_V = -1.014158e+01 ;
 
-		csv_parse_string( str, &_Point  ) ;	
+	csv_parse_string( str, &_Point  ) ;	
+
 
 	printf ("\n Вывод из main \n") ;
 	printf(" \n string :   %s \n", str );
@@ -223,6 +224,38 @@ int main (int argc, char *argv[]){
 
 	printf(" \n *ch1_V :   %e \n", _Point.ch1_V );
 
+
+ // Выделение памяти
+  // a = (int*)malloc(n * m * sizeof(int));
+  // Освобожнение памяти
+  // free(a);
+
+	// allocate_strings(_Point);
+
+//#undef DEBUG
+#ifdef DEBUG1
+
+	int *m ;
+	int n = 3 ; // количество строк
+	int *a ;
+
+	a = (int*) malloc(sizeof(int) * 3);
+	a[0] = 0 ;
+	a[1] = 1 ;
+	a[2] = 2 ;
+ 
+	printf (" alloc ");
+	printf ("\n a[0] = %d ", a[0] );
+	printf ("\n a[1] = %d ", a[1] );
+	printf ("\n a[2] = %d \n", a[2] );
+
+	if ( a == NULL )  return NULL_pointer ; 
+
+	printf ("sizeoff Point = %d\n", sizeof(_Point)) ;
+
+	// кол-во в строках элементов массива а
+
+#endif
 
 
 
@@ -235,7 +268,6 @@ return noerror ;
 
 	 return noerror ;
 }
-
 
 
 
