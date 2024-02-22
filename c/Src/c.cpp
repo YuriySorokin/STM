@@ -270,17 +270,26 @@ return 1 ;
 	printf ( " \n points.size() = %d ",points.size() );
 	std::cout << '\n' ;
 	
+
+
 // подключение структуры iPoints
 
 	std::cout << "Begin !!!" ;
 	std::vector<struct iPoint> points2;
 	
+	printf ( " \n points.at = %d ",points.at(0) );
+	// points.at(2).time = 2 ;
+	printf ( " \n points.at = %d ",points.at(2) );
 
 
 
-	for ( int ip = 0  ; ip < 3 ; ip++  )
-		printf ( "\n _Point.time [ %d ] = , %e",ip,_Point.time ) ;
+	for ( int ip = 0  ; ip < 3 ; ip++  ) {
+		printf ( "\n _Point.time [ %d ] = , %e \n",ip,_Point.time ) ;
+		printf ( "points.at(%n).time = \n", points.at(ip).time ) ;
+	}
 	std::cout << std::endl ;
+
+	
 
 	ve.push_back(3.0);
 	ve.push_back(5.2);
