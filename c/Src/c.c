@@ -199,9 +199,13 @@ int main (int argc, char *argv[]){
 	char str[L_BUFFER_STRING] = {'\0'};
 	char symbol = '\0';
 	  
-	if ( file_open( &fp, argv[1] ) == noerror );
+	if ( file_open( &fp, argv[1] ) == noerror )
 {
 		get_first_line( fp , str );
+}else 
+{
+	printf ("There is no input file");
+return 1 ;
 }
 	printf (" \n 1-st string from file is : \n %s ", str );
 	printf ("\n");
