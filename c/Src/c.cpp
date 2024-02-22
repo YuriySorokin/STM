@@ -3,6 +3,8 @@
 #include <stdbool.h>
 #include <string.h>
 #include <stdarg.h>
+#include <iostream>
+#include <vector>
 
 //#define noerror 0 ;
 #define DEBUG
@@ -28,17 +30,29 @@ enum progress {
 } ;
 
 struct Point {
-	// int index ;
+	//int index ;
 	float time ;				
 	float ch1_V ;
 	// float time_increment ;
 } ;
 
-struct Vector_point {
+struct iPoint {
+	int index ;
+	struct Point point;
+} ;
+
+
+
+class Vector_point {
+	public:
 	int index ;
 	struct Point member;
 	struct Vector_point *prev_point; 
 	struct Vector_point *next_point;
+	static void printf (void) 	{ 
+			 std::cout << "\n !!!!! member : !!!!!" << " : \n ";
+	}
+
 } ;
 
 class Data_Point
@@ -231,8 +245,7 @@ return 1 ;
 
 
 	csv_parse_string( str, &_Point  ) ;	
-	new_element_Point(_Point);
-
+	
 
 	printf ("\n Вывод из main \n") ;
 	printf(" \n string :   %s \n", str );
@@ -241,6 +254,49 @@ return 1 ;
 
 	printf(" \n *ch1_V :   %e \n", _Point.ch1_V );
 
+	Vector_point m1;
+	m1.printf;
+
+	std::vector<struct Point> points;
+
+	std::vector<float> ve ;
+
+	points.push_back (_Point) ;
+	csv_parse_string( str, &_Point  ) ;	
+	points.push_back (_Point) ;
+	csv_parse_string( str, &_Point  ) ;	
+	points.push_back (_Point) ;
+
+	printf ( " \n points.size() = %d ",points.size() );
+	std::cout << '\n' ;
+	
+// подключение структуры iPoints
+
+	std::cout << "Begin !!!" ;
+	std::vector<struct iPoint> points2;
+	
+
+
+
+	for ( int ip = 0  ; ip < 3 ; ip++  )
+		printf ( "\n _Point.time [ %d ] = , %e",ip,_Point.time ) ;
+	std::cout << std::endl ;
+
+	ve.push_back(3.0);
+	ve.push_back(5.2);
+	ve.push_back(7.4);
+
+	std::cout << ve.size()  << '\n' ;
+	std::cout << ve[0]  << '\n' ;
+	std::cout << ve[1]  << '\n' ;
+	std::cout << ve[2]  << '\n' ;
+int cir = 0 ;
+	for( auto it = ve.begin() ; it != ve.end() ; it++)
+		{
+
+			std::cout << "\n ve " << ve[cir] << std::endl ;
+			cir++ ;
+		}
 
  // Выделение памяти
   // a = (int*)malloc(n * m * sizeof(int));
