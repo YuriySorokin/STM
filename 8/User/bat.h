@@ -10,7 +10,7 @@
 
 
 
-void battery_metter( double* );
+void battery_metter( float* );
 
 
 

@@ -29,6 +29,9 @@ enum progress {
 	FAULT = 10
 } ;
 
+enum progress STATUS = OK ;
+
+
 struct Point {
 	//int index ;
 	float time ;				
@@ -42,23 +45,51 @@ struct iPoint {
 } ;
 
 
-
+/*
 class Vector_point {
 	public:
-	int index ;
+	int m_index ;
+	int m_insider ;
 	struct Point member;
 	struct Vector_point *prev_point; 
 	struct Vector_point *next_point;
-	static void printf (void) 	{ 
-			 std::cout << "\n 
-			 	!!!!!
-				Class Vector_point
-				struct Point member
-				 Point member printf : 
-				 !!!!!" << " : \n ";
-	}
+	static int printm () 	{ 
+			 std::cout << m_index <<"/"<<m_insider<< "\n";
+			 return m_index ;
+			 //printf("\ntest message ___________________\n");
+			 	}
 
 } ;
+*/
+
+class test_Vector 
+{
+public:
+	int m_index ;
+	int m_insider ;
+	struct Point member ;
+
+	test_Vector(){ // конструктор
+		m_index = 1 ;
+		m_insider = 2 ;
+		member.time = 0 ;
+		member.ch1_V = 0 ;
+	}
+	void gettest_Vector() {
+		std::cout <<"\n"<< "m_index = " << m_index << "m_insider = " << m_insider << "\n"; 
+	} 
+	
+	struct test_vector *thisV ;
+	struct test_Vector *prev_point; 
+	struct test_Vector *next_point; 
+
+	void printm ()
+	 	{ 
+			 std::cout << m_index <<"/"<<m_insider<< "\n";
+			 printf("\ntest message ___________________\n");
+	 	}
+} ;
+
 
 class Data_Point
 {
@@ -80,7 +111,7 @@ int getc_from_file();
 int file_open ( FILE** , char*); // открытие файла с коммандной строки 1 арг
 int file_printf ( FILE* , char* );
 int get_first_line( FILE * , char * ) ;
-int get_next_line( FILE * , char * ) ;
+progress get_next_line( FILE * , char * ) ;
 int csv_parse_string( char *, struct Point *  ) ;
 int get_col ( char *, char, float *, float * );
 
@@ -179,12 +210,12 @@ int get_first_line( FILE *fp , char *in_string ) {
 	return OK ; 
 }
 
-int get_next_line( FILE *fp , char *in_string ) {
+progress get_next_line( FILE *fp , char *in_string ) {
 	char symbol = '0';
 	char str[L_BUFFER_STRING] = {'0'} ;
 	int i = 0 ;
 	int res = 0, res1 = 0, res2 = 0, res3 = 0 ; 
-	enum progress STATUS = OK ;
+	
 
   	  while 	(	(( symbol = fgetc(fp)) != EOF) 
 						&&
@@ -226,6 +257,7 @@ int main (int argc, char *argv[]){
 
 	FILE *fp;
 	int i = 0 ;	
+	struct Point _Point ;
 
 	char str[L_BUFFER_STRING] = {'\0'};
 	char symbol = '\0';
@@ -238,6 +270,8 @@ int main (int argc, char *argv[]){
 	printf ("\nThere is no input file \n");
 return 1 ;
 }
+
+#ifdef DEBUG1
 	printf (" \n 1-st string from file is : \n %s ", str );
 	printf ("\n");
 	
@@ -246,82 +280,98 @@ return 1 ;
 	printf (" \n next string from file is : \n %s ", str );
 	printf ("\n");
 
-	struct Point _Point ;
-
+	
 
 	csv_parse_string( str, &_Point  ) ;	
 	
-
-	printf ("\n Вывод из main \n") ;
 	printf(" \n string :   %s \n", str );
 
 	printf(" \n *time :   %e \n", _Point.time );
 
-	printf(" \n *ch1_V :   %e \n", _Point.ch1_V );
+	printf(" \n *ch1_V :   %e \n \n", _Point.ch1_V );
+	
+	printf ("\n считан элемент из файла  \n") ;
+	printf("\n part1 \n");
+	press_AnyKey();
+	
+#endif 
 
-	Vector_point m1;
-	m1.printf;
+//	Vector_point m1 {12 , 11 }; /// Проверить
+//	m1.printm() ;		// Проверить
+//	m1.m_index = 18 ;
 
+	test_Vector today ;	
+	today.gettest_Vector();
+	
+		
+	return 0 ; // end
+	
+//	printf ("\n m1.printm = %d", m1.printm());
+//	printf ("\n m1.member = %d", m1.member);
+	
 	std::vector<struct Point> points;
 
-	std::vector<float> ve ;
 
-	points.push_back (_Point) ;
-	csv_parse_string( str, &_Point  ) ;	
-	points.push_back (_Point) ;
-	csv_parse_string( str, &_Point  ) ;	
-	points.push_back (_Point) ;
-
-	printf ( " \n points.size() = %d ",points.size() );
-	//std::cout << '\n' ;
+	STATUS = get_next_line( fp, str ) ;
 	
+	//printf ("Status = %s" , (char*)STATUS) ;
+	press_AnyKey();
+	//int ii = 10 ;
 
-
-// подключение структуры iPoints
-
-	std::cout << "Begin !!!" ;
-	std::vector<struct iPoint> points2;
+	while ( STATUS == reached_EOL  )
+	{
+		printf (" \nSize of points = %d \n",points.size() ) ;
+	//	printf (" points = %d \n",points.size()/sizeof(_Point) ) ;
 	
-	printf ( " \n points.at( 0 ) = %d",points.at(0) );
-	printf ( " \n points.at(0).time = %d ",points.at(0).time );
-	// points.at(2).time = 2 ;
-	printf ( " \n points.at(1) = %d ",points.at(1) );
-	printf ( " \n points.at(1).time = %d ",points.at(1).time );
+			csv_parse_string( str, &_Point  ) ;	
+			STATUS = get_next_line( fp, str ) ;
+				points.push_back (_Point) ;
+	}
 
-	printf ( " \n points.at(2) = %d ",points.at(2) );
-	printf ( " \n points.at(2).time = %d ",points.at(2).time );
+	
+	printf (" \nSize of points = %d \n",points.size() ) ;
+	//printf (" points = %d \n",points.size()/sizeof(_Point) ) ;
+	
+	
+	press_AnyKey();
 
-	printf ( " \n points.at( 0 ) = %d",points.at(0) );
-	printf ( " \n points.at(0).time = %d ",points.at(0).time );
-	// points.at(2).time = 2 ;
-	printf ( " \n points.at(1) = %d ",points.at(1) );
-	printf ( " \n points.at(1).time = %d ",points.at(1).time );
 
+
+#ifdef DEBUG1 
+
+		STATUS = get_next_line( fp, str ) ;
+			csv_parse_string( str, &_Point  ) ;	
+				points.push_back (_Point) ;
+		
+		STATUS = get_next_line( fp, str ) ;
+			csv_parse_string( str, &_Point  ) ;	
+				points.push_back (_Point) ;
+
+		STATUS = get_next_line( fp, str ) ;
+			csv_parse_string( str, &_Point  ) ;	
+				points.push_back (_Point) ;
+	
+		STATUS = get_next_line( fp, str ) ;
+			csv_parse_string( str, &_Point  ) ;	
+				points.push_back (_Point) ;
+#endif
 
 printf ("\nBlock 2 \n");
 
+	printf ("Size of points = %d \n",points.size() ) ;
 
-	for ( int ip = 0  ; ip < 3 ; ip++  ) {
-			printf ( "points.at(%d).time = %f \n", ip, points.at(ip).time ) ; // error
+	press_AnyKey();
+
+	for ( int ip = 0  ; ip < points.size() ; ip++  ) {
+						
+			printf ( " \n points.at( %d ).time = %e ",ip, points.at( ip ).time );
+			printf ( " \n points.at( %d ).ch1_V = %e \n\n", ip,points.at( ip ).ch1_V );
+
 	}
 	std::cout << std::endl ;
 
 	
 
-	ve.push_back(3.0);
-	ve.push_back(5.2);
-	ve.push_back(7.4);
-
-	std::cout << ve.size()  << '\n' ;
-	std::cout << ve[0]  << '\n' ;
-	std::cout << ve[1]  << '\n' ;
-	std::cout << ve[2]  << '\n' ;
-int cir = 0 ;
-	for( auto it = ve.begin() ; it != ve.end() ; it++)
-		{
-			std::cout << "\n ve " << ve[cir] << std::endl ;
-			cir++ ;
-		}
 
  // Выделение памяти
   // a = (int*)malloc(n * m * sizeof(int));
@@ -331,34 +381,27 @@ int cir = 0 ;
 	// allocate_strings(_Point);
 
 //#undef DEBUG
-#ifdef DEBUG1
+
 
 	int *m ;
 	int n = 3 ; // количество строк
 	int *a ;
 
 	a = (int*) malloc(sizeof(int) * 3);
+	if ( a == NULL )  return NULL_pointer ; 
+
 	a[0] = 0 ;
 	a[1] = 1 ;
 	a[2] = 2 ;
  
-	printf (" alloc ");
+	printf (" malloc ");
 	printf ("\n a[0] = %d ", a[0] );
 	printf ("\n a[1] = %d ", a[1] );
 	printf ("\n a[2] = %d \n", a[2] );
 
-	if ( a == NULL )  return NULL_pointer ; 
+	free(a);
 
-	printf ("sizeoff Point = %d\n", sizeof(_Point)) ;
-
-	// кол-во в строках элементов массива а
-
-#endif
-
-
-
-
-return noerror ;
+// return noerror ;
 
 
     	    fclose(fp);
@@ -373,6 +416,7 @@ return noerror ;
 
 
 int csv_parse_string( char *in_string, struct Point *_Point  ) {
+	// парсит из сроки, переданной в функцию
  // csv_parse_text( char* in_string, char separator, struct Point *Point  ) {
 		char separator = ',';
 		// printf (" Вывод из csv_parse_text : \n") ;	//OK
@@ -402,8 +446,10 @@ int get_col ( char *in_string, char separator, float *time, float *ch1_V ) {
 	}
 		buffer[i] = EOL ; *(in_string++) ;
 
+#ifdef DEBUG1
 		printf(" \n *buffer :   %s \n", buffer );
-		
+#endif
+
 	*time = strtof(buffer, NULL); // из строки во float
 	
 	i = 0 ; // *instring продолжает считать
@@ -441,6 +487,6 @@ bool csv_parse_text(const char* const text,
 
 
 void press_AnyKey(void) { // 
-												printf("press anykey");
+										printf("press Enter to continue");
 		getchar();
 }

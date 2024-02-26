@@ -11,7 +11,7 @@
 #include <stdio.h>
 
 
-void battery_metter(double *batteryVoltage){
+void battery_metter(float *batteryVoltage){
 
 	uint8_t count10 = 1 ;
 	float mcuVoltage = 0;
@@ -34,7 +34,7 @@ void battery_metter(double *batteryVoltage){
 			 if ( HAL_ADC_PollForConversion(&hadc1, Timeout) != HAL_OK ) { ; };
 
 			mcuVoltage = ADC_MAX * ADC_REFERENCE_VOLTAGE / adcData[0];
-			*batteryVoltage = 2 * adcData[1] * mcuVoltage / ADC_MAX;
+			*batteryVoltage = (float) (2 * adcData[1] * mcuVoltage / ADC_MAX);
 
 
 
@@ -48,7 +48,7 @@ void get_battery_level (char *curTime){
 	char buffer[] = "                  "; // обязательно 8-мь, не меньше, чем сформируется строка
 	int i = 0 ;
 	//float batteryVoltage = 0 ;
-	double batteryVoltage = 0 ;
+	float batteryVoltage = 0 ;
 
 
 	//float mcuVoltage = 0;
