@@ -50,7 +50,12 @@ class Vector_point {
 	struct Vector_point *prev_point; 
 	struct Vector_point *next_point;
 	static void printf (void) 	{ 
-			 std::cout << "\n !!!!! member : !!!!!" << " : \n ";
+			 std::cout << "\n 
+			 	!!!!!
+				Class Vector_point
+				struct Point member
+				 Point member printf : 
+				 !!!!!" << " : \n ";
 	}
 
 } ;
@@ -268,7 +273,7 @@ return 1 ;
 	points.push_back (_Point) ;
 
 	printf ( " \n points.size() = %d ",points.size() );
-	std::cout << '\n' ;
+	//std::cout << '\n' ;
 	
 
 
@@ -277,15 +282,27 @@ return 1 ;
 	std::cout << "Begin !!!" ;
 	std::vector<struct iPoint> points2;
 	
-	printf ( " \n points.at = %d ",points.at(0) );
+	printf ( " \n points.at( 0 ) = %d",points.at(0) );
+	printf ( " \n points.at(0).time = %d ",points.at(0).time );
 	// points.at(2).time = 2 ;
-	printf ( " \n points.at = %d ",points.at(2) );
+	printf ( " \n points.at(1) = %d ",points.at(1) );
+	printf ( " \n points.at(1).time = %d ",points.at(1).time );
 
+	printf ( " \n points.at(2) = %d ",points.at(2) );
+	printf ( " \n points.at(2).time = %d ",points.at(2).time );
+
+	printf ( " \n points.at( 0 ) = %d",points.at(0) );
+	printf ( " \n points.at(0).time = %d ",points.at(0).time );
+	// points.at(2).time = 2 ;
+	printf ( " \n points.at(1) = %d ",points.at(1) );
+	printf ( " \n points.at(1).time = %d ",points.at(1).time );
+
+
+printf ("\nBlock 2 \n");
 
 
 	for ( int ip = 0  ; ip < 3 ; ip++  ) {
-		printf ( "\n _Point.time [ %d ] = , %e \n",ip,_Point.time ) ;
-		printf ( "points.at(%n).time = \n", points.at(ip).time ) ;
+			printf ( "points.at(%d).time = %f \n", ip, points.at(ip).time ) ; // error
 	}
 	std::cout << std::endl ;
 
@@ -302,7 +319,6 @@ return 1 ;
 int cir = 0 ;
 	for( auto it = ve.begin() ; it != ve.end() ; it++)
 		{
-
 			std::cout << "\n ve " << ve[cir] << std::endl ;
 			cir++ ;
 		}
