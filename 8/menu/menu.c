@@ -64,6 +64,31 @@ void Switch_MenuScreen(uint8_t step_by_step){
 	     default : break ;
 	}
 }
+typedef enum bol {
+	OK = 0 ,
+	FAIL = 1
+} _Nnet;
+
+
+struct Window {
+	char * firmware[30] ;
+	float firmware_version ;
+	float thickness ;
+	float battery_level ;
+	int error_N ;
+	_Net net_OK ;
+};
+
+
+/*
+
+ Line1  Name: firmware_name, version: firmware_version
+ Line2  Time: Time_current, (+timeZone), data
+ Line3  H: thickness, [mm]
+ Line4
+
+*/
+
 
 
 void Frame1(){
@@ -81,7 +106,7 @@ void Frame1(){
 	 *
 	 * print line4
 	 * 	Left before  <  pwd  > Right after
-	 *
+	 *  one(1) from six(6)
 	 ** 	1	< Home >	1
 	*/
 	print_Line1_F1(); // x0 y10

@@ -108,6 +108,7 @@ void MX_RTC_Init(void)
 
   // Установите время, установите флаг
   	  HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR0, iSetFlag);
+  	  // iSetFlag = 0x5053; // Это значение 0x5053, которое вы будете free
   }
 
   /* USER CODE END RTC_Init 2 */

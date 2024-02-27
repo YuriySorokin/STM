@@ -19,4 +19,8 @@ void get_battery_level (char *);
 
 void get_battery_level ( char*) ;
 
+void on_Zero_hoursetcurrent_date_and_time (void);
+
+
+
 #endif /* DISPLAY_H_ */

@@ -6,6 +6,8 @@
  */
 #include "time.h"
 #include "user.h"
+#include "display.h"
+
 
 enum Menu_number
 {
@@ -52,8 +54,16 @@ void print_text_Line2_F1(void){
     TFT9341_String( x_pixel_Date, y_Pixel, clear);
     TFT9341_String( x_pixel_Date, y_Pixel, curDate);
 
+    on_Zero_hoursetcurrent_date_and_time ();
+}
+
+
+void on_Zero_hoursetcurrent_date_and_time (void){
+
+	//HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR0, iSetFlag);
 
 }
+
 
 void print_text_Line3_F1(void){
 

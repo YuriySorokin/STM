@@ -68,6 +68,7 @@ void get_Time (char *curTime){
 
 		i++;
 	}
+   // on_Zero_hoursetcurrent_date_and_time (&hrtc);
 }
 
 
