@@ -198,6 +198,8 @@ void SystemClock_Config(void)
 void Error_Handler(void)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
+
+	//
   /* User can add his own implementation to report the HAL error return state */
 	// ldr r3, NVIC_INT_CTRL_CONST ;
 	/* Загрузка адреса регистра управления прерываниями в r3. */
