@@ -56,11 +56,11 @@ void get_Time (char *curTime){
 	extern RTC_DateTypeDef sDate;
 
 	HAL_RTC_GetTime(&hrtc, &sTime, RTC_FORMAT_BIN);
-	HAL_RTC_GetDate(&hrtc, &sDate, RTC_FORMAT_BIN);
+	HAL_RTC_GetDate(&hrtc, &sDate, RTC_FORMAT_BIN); // GetDate for closing register
 	sprintf(bufferH, "%2d:%2d:%2d", (int)sTime.Hours, (int)sTime.Minutes, (int)sTime.Seconds);
 	//curTime = bufferH ;
 	while (bufferH[i]){
-		if (bufferH[i] == 32) {
+		if (bufferH[i] == 32) { // change space to Zero
 			curTime[i] = 48 ;
 		} else {
 		curTime[i] = bufferH[i] ;
@@ -103,3 +103,51 @@ void get_time_to_comm ( void ) { // на экран
 //	HAL_Delay(1000);
 
 };
+
+void get_Date (char *curDate){
+
+	extern RTC_HandleTypeDef hrtc ;
+	extern RTC_DateTypeDef sDate;
+
+	HAL_RTC_GetDate(&hrtc, &sDate, RTC_FORMAT_BIN);
+
+	char bufferH[] = "        "; // обязательно 8-мь, не меньше, чем сформируется строка
+		int i = 0 ;
+
+		extern RTC_HandleTypeDef hrtc ;
+		//extern RTC_TimeTypeDef sTime;
+		extern RTC_DateTypeDef sDate;
+
+		//HAL_RTC_GetTime(&hrtc, &sTime, RTC_FORMAT_BIN);
+		HAL_RTC_GetDate(&hrtc, &sDate, RTC_FORMAT_BIN); // GetDate for closing register
+		sprintf(bufferH, "%2d:%2d:%2d", (int)sDate.Date, (int)sDate.Month, (int)sDate.Year);
+		//curTime = bufferH ;
+		while (bufferH[i]){
+			if (bufferH[i] == 32) { // change space to Zero
+				curDate[i] = 48 ;
+			} else {
+				curDate[i] = bufferH[i] ;
+			}
+
+			i++;
+		}
+}
+
+void set_Date(void){
+ //	Deal: up date for one
+	// 1. get date
+	// 2. plus date
+	// 3. save date
+	extern RTC_HandleTypeDef hrtc ;
+	extern RTC_DateTypeDef sDate;
+
+	HAL_RTC_GetDate(&hrtc, &sDate, RTC_FORMAT_BIN);
+
+	sDate.Year = (uint8_t)2000 ;
+	sDate.Month = 1 ;
+	sDate.Date = 1 ;
+
+	// 1.get current Date
+
+}
+

@@ -26,19 +26,32 @@ void print_text_Line2_F1(void){
 
 	TFT9341_SetTextColor(TFT9341_CYAN);
     TFT9341_SetBackColor(TFT9341_BLACK);
-    TFT9341_SetFont(&Font24);
+    TFT9341_SetFont(&Font12);
+
+    int y_Pixel = 54 ;
+    int x_pixel_wTime = 10 ;
+    int x_pixel_Time = 60 ;
+    int x_pixel_Date = 150 ;
+
     char curTime[] = "         ";
+    char curDate[] = "         ";
+
     char clear[] = "              " ; // 5 + 9
 
-    TFT9341_String( 10, 54, clear);
+    TFT9341_String( 10, y_Pixel, clear);
 
     char time[] = "Time:";
-    TFT9341_String( 10, 54, time);
+    TFT9341_String( x_pixel_wTime, y_Pixel, time);
 
 
     get_Time( (char*)curTime );
-    TFT9341_String( 116, 54, clear);
-    TFT9341_String( 116, 54, curTime);
+    TFT9341_String( x_pixel_Time, y_Pixel, clear);
+    TFT9341_String( x_pixel_Time, y_Pixel, curTime);
+
+    get_Date ((char*)curDate );
+    TFT9341_String( x_pixel_Date, y_Pixel, clear);
+    TFT9341_String( x_pixel_Date, y_Pixel, curDate);
+
 
 }
 
@@ -60,7 +73,7 @@ void print_text_Line1_F2(void){
 	TFT9341_SetTextColor(TFT9341_CYAN);
     TFT9341_SetBackColor(TFT9341_BLACK);
     TFT9341_SetFont(&Font24);
-    char curTime[] = "         ";
+    //char curTime[] = "         ";
     char clear[] = "              " ; // 5 + 9
     char battery_level[10] = "         " ;
 
@@ -75,5 +88,7 @@ void print_text_Line1_F2(void){
     get_battery_level ( (char*)battery_level ) ;
     TFT9341_String( 116, shiftUp + 24 * 1, clear);
     TFT9341_String( 116, shiftUp + 24 * 1, battery_level);
+
+
 
 }
