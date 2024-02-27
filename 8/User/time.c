@@ -141,11 +141,13 @@ void set_Date(void){
 	extern RTC_HandleTypeDef hrtc ;
 	extern RTC_DateTypeDef sDate;
 
-	HAL_RTC_GetDate(&hrtc, &sDate, RTC_FORMAT_BIN);
+	HAL_RTC_GetDate(&hrtc, &sDate, 0x00000001U);
 
-	sDate.Year = (uint8_t)2000 ;
-	sDate.Month = 1 ;
-	sDate.Date = 1 ;
+	sDate.Year = (uint8_t)0x024 ;
+	sDate.Month = (uint8_t)0x002 ;
+	sDate.Date = (uint8_t)0x027 ;
+
+	HAL_RTC_SetDate( &hrtc, &sDate, RTC_FORMAT_BCD) ;
 
 	// 1.get current Date
 

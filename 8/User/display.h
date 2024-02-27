@@ -17,5 +17,6 @@ void print_text_Line1_F2(void);
 
 void get_battery_level (char *);
 
+void get_battery_level ( char*) ;
 
 #endif /* DISPLAY_H_ */

@@ -517,6 +517,7 @@ void start(void)
 
 	Get_Usonic_distance();
 
+	set_Date();
 
 
 	  //while (1){
