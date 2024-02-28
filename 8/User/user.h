@@ -44,6 +44,7 @@ void  Start_2(void);
 void Display_welcomeScreen(void);
 void print_text_distance(void);
 void fill_menu_data (void);
+void 	print_Line1_F2(void);
 
 
 

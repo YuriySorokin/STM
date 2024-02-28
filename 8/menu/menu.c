@@ -67,16 +67,21 @@ void Switch_MenuScreen(uint8_t step_by_step){
 typedef enum bol {
 	OK = 0 ,
 	FAIL = 1
-} _Nnet;
+} _Net;
 
 
-struct Window {
-	char * firmware[30] ;
+struct window {
+	char  firmware[20];
 	float firmware_version ;
-	float thickness ;
-	float battery_level ;
+	float thickness  ;
+	float battery_level  ;
 	int error_N ;
-	_Net net_OK ;
+	_Net net_OK  ;
+	int serial_number;
+	float temperature ;
+	float v_sound ;
+	int contact_status ;
+	int time_measure ;
 };
 
 

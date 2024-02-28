@@ -14,6 +14,7 @@
 #include  "LED.h"
 #include "menu.h"
 #include "data.h"
+#include "debug_out.h"
 
 
 //#include "fonts.h"
@@ -519,6 +520,7 @@ void start(void)
 
 	set_Date();
 
+	int ret = sum ( 1 , 2, 3 , 4 ) ;
 
 	  //while (1){
 
