@@ -26,7 +26,7 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN TD */
-
+#include "LED.h"
 /* USER CODE END TD */
 
 /* Private define ------------------------------------------------------------*/
@@ -303,5 +303,23 @@ void DMA2D_IRQHandler(void)
 }
 
 /* USER CODE BEGIN 1 */
+void HAL_RTC_AlarmAEventCallback(RTC_HandleTypeDef *hrtc){
 
+	int circle = 100000 ;
+
+	while ( 1 )
+		{
+		delay_Led_on ( circle ) ;
+
+		};
+
+	while ( circle -- ) {
+		circle++ ; circle-- ;
+		//wait callback
+		delay_Led_on ( circle ) ;
+		delay_Led_off ( circle /2) ;
+	}
+
+
+}
 /* USER CODE END 1 */
