@@ -11,9 +11,9 @@
 
 void fill_string(uint8_t* destString, uint8_t* string ){
 
-	uint8_t  count_size = 0;
-	count_size = sizeof ( destString ) ;
-	count_size = sizeof ( *destString ) ;
+	//uint8_t  count_size = 0;
+	//count_size = sizeof ( destString ) ;
+	//count_size = sizeof ( *destString ) ;
 
 	  /* strcpy: копирует строку t в s;
 				вариант 2 с указателями */
@@ -23,7 +23,7 @@ void fill_string(uint8_t* destString, uint8_t* string ){
 
 void fill_menu_data (void){
 
-	uint8_t count_size = 0;
+	//uint8_t count_size = 0;
 	uint8_t string[] = "one";
 
 	Menu_Data Datamenu;

@@ -5,6 +5,8 @@
 #include <stdarg.h>
 #include <iostream>
 #include <vector>
+#include "termios.h"
+
 //#include <windows.h>
 
 
