@@ -207,6 +207,28 @@ void SysTick_Handler(void)
 /******************************************************************************/
 
 /**
+  * @brief This function handles EXTI line0 interrupt.
+  */
+void EXTI0_IRQHandler(void)
+{
+  /* USER CODE BEGIN EXTI0_IRQn 0 */
+
+  /* USER CODE END EXTI0_IRQn 0 */
+  if (LL_EXTI_IsActiveFlag_0_31(LL_EXTI_LINE_0) != RESET)
+  {
+    LL_EXTI_ClearFlag_0_31(LL_EXTI_LINE_0);
+    /* USER CODE BEGIN LL_EXTI_LINE_0 */
+
+    	Led_green_on() ;
+
+    /* USER CODE END LL_EXTI_LINE_0 */
+  }
+  /* USER CODE BEGIN EXTI0_IRQn 1 */
+
+  /* USER CODE END EXTI0_IRQn 1 */
+}
+
+/**
   * @brief This function handles USART1 global interrupt.
   */
 void USART1_IRQHandler(void)
@@ -333,4 +355,27 @@ void HAL_RTC_AlarmAEventCallback(RTC_HandleTypeDef *hrtc){
 */
 
 }
+/* не работает для exti0
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
+
+	Led_green_on();
+	if(GPIO_Pin== GPIO_PIN_0) {
+
+		Led_red_on();
+
+	  } else{
+
+		  Led_red_off(50);
+
+
+	    __NOP();
+
+	  }
+	while(1) {__NOP();} ;
+}
+*/
+
+
+
+
 /* USER CODE END 1 */

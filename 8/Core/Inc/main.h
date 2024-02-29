@@ -107,6 +107,7 @@ void Error_Handler(void);
 #define CS_GPIO_Port GPIOC
 #define button_Pin LL_GPIO_PIN_0
 #define button_GPIO_Port GPIOA
+#define button_EXTI_IRQn EXTI0_IRQn
 #define MEMS_INT1_Pin LL_GPIO_PIN_1
 #define MEMS_INT1_GPIO_Port GPIOA
 #define VSYNC_Pin LL_GPIO_PIN_4

@@ -54,7 +54,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-
+RTC_HandleTypeDef rtcHandle;
 //TIM_HandleTypeDef htim1;
 
 /* USER CODE END PV */
@@ -112,7 +112,7 @@ int main(void)
   MX_RTC_Init();
   MX_ADC1_Init();
   /* USER CODE BEGIN 2 */
-  //HAL_RTC_MspInit( rtcHandle);
+  //HAL_RTC_MspInit( &rtcHandle);
 
 
 
