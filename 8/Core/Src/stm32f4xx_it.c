@@ -305,13 +305,13 @@ void DMA2D_IRQHandler(void)
 /* USER CODE BEGIN 1 */
 void HAL_RTC_AlarmAEventCallback(RTC_HandleTypeDef *hrtc){
 
-	int circle = 100000 ;
+/*	int circle = 1000 ;
 
-	while ( 1 )
-		{
+
 		delay_Led_on ( circle ) ;
+	}
+		//
 
-		};
 
 	while ( circle -- ) {
 		circle++ ; circle-- ;
@@ -320,6 +320,7 @@ void HAL_RTC_AlarmAEventCallback(RTC_HandleTypeDef *hrtc){
 		delay_Led_off ( circle /2) ;
 	}
 
+*/
 
 }
 /* USER CODE END 1 */

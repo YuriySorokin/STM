@@ -23,6 +23,7 @@ typedef enum
 
 RTC_TimeTypeDef sTime = {0};
 RTC_DateTypeDef sDate = {0};
+RTC_AlarmTypeDef sAlarm = {0};
 
 
 
@@ -134,23 +135,105 @@ void get_Date (char *curDate){
 		}
 }
 
-void set_Date(void){
- //	Deal: up date for one
+void set_Date( uint8_t DD, uint8_t MM, uint8_t YY ){
+
+	//	Deal: up date for one
 	// 1. get date
 	// 2. plus date
 	// 3. save date
 	extern RTC_HandleTypeDef hrtc ;
 	extern RTC_DateTypeDef sDate;
 
-	HAL_RTC_GetDate(&hrtc, &sDate, 0x00000001U);
+	HAL_RTC_GetDate(&hrtc, &sDate, RTC_FORMAT_BIN);
 
-	sDate.Year = (uint8_t)0x024 ;
-	sDate.Month = (uint8_t)0x002 ;
-	sDate.Date = (uint8_t)0x027 ;
+	sDate.Year = YY ;
+	sDate.Month = MM ;
+	sDate.Date = DD ;
 
-	HAL_RTC_SetDate( &hrtc, &sDate, RTC_FORMAT_BCD) ;
+	HAL_RTC_SetDate( &hrtc, &sDate, RTC_FORMAT_BIN) ;
 
 	// 1.get current Date
 
+}
+
+void set_Alarm (uint8_t SS,uint8_t MM,uint8_t HH){
+
+	extern RTC_AlarmTypeDef sAlarm ;
+	extern RTC_HandleTypeDef hrtc ;
+
+	HAL_RTC_GetDate(&hrtc, &sDate, RTC_FORMAT_BIN);
+	HAL_RTC_GetAlarm( &hrtc, &sAlarm, RTC_ALARM_A, RTC_FORMAT_BIN) ;
+
+
+
+
+	  sAlarm.AlarmTime.Hours = HH;
+	  sAlarm.AlarmTime.Minutes = MM;
+	  sAlarm.AlarmTime.Seconds = SS;
+	  sAlarm.AlarmTime.SubSeconds = 0;
+	  sAlarm.AlarmTime.DayLightSaving = RTC_DAYLIGHTSAVING_NONE;
+	  sAlarm.AlarmTime.StoreOperation = RTC_STOREOPERATION_RESET;
+	  sAlarm.AlarmMask = RTC_ALARMMASK_NONE;
+	  sAlarm.AlarmSubSecondMask = RTC_ALARMSUBSECONDMASK_ALL;
+	  sAlarm.AlarmDateWeekDaySel = RTC_ALARMDATEWEEKDAYSEL_DATE;
+	  sAlarm.AlarmDateWeekDay = sAlarm.AlarmDateWeekDay;
+	  sAlarm.Alarm = RTC_ALARM_A;
+
+	  if (HAL_RTC_SetAlarm_IT(&hrtc, &sAlarm, RTC_FORMAT_BIN) != HAL_OK)
+	  {
+	    Error_Handler();
+	  }
+}
+void set_Time (void){
+	  /** Initialize RTC and set the Time and Date
+	  */
+
+	extern RTC_HandleTypeDef hrtc ;
+	extern RTC_TimeTypeDef sTime;
+
+
+	sTime.Hours = 1;
+	  sTime.Minutes = 0;
+	  sTime.Seconds = 0;
+	  sTime.DayLightSaving = RTC_DAYLIGHTSAVING_NONE;
+	  sTime.StoreOperation = RTC_STOREOPERATION_RESET;
+	  if (HAL_RTC_SetTime(&hrtc, &sTime, RTC_FORMAT_BIN) != HAL_OK)
+	  {
+	    Error_Handler();
+	  }
+
+}
+
+
+void get_Alarm (char *curTime){
+
+
+
+	char bufferH[] = "        "; // обязательно 8-мь, не меньше, чем сформируется строка
+	int i = 0 ;
+
+	extern RTC_HandleTypeDef hrtc ;
+	extern RTC_TimeTypeDef sTime;
+	extern RTC_DateTypeDef sDate;
+	extern RTC_AlarmTypeDef sAlarm ;
+
+	//HAL_RTC_GetTime(&hrtc, &sTime, RTC_FORMAT_BIN);
+	//HAL_RTC_GetDate(&hrtc, &sDate, RTC_FORMAT_BIN); // GetDate for closing register
+	HAL_RTC_GetAlarm(&hrtc, &sAlarm, RTC_ALARM_A, RTC_FORMAT_BIN) ;
+
+
+
+	sprintf(bufferH, "%2d:%2d:%2d", (int)sAlarm.AlarmTime.Hours, (int)sAlarm.AlarmTime.Minutes, (int)sAlarm.AlarmTime.Seconds);
+	//curTime = bufferH ;
+	while (bufferH[i]){
+		if (bufferH[i] == 32) { // change space to Zero
+			curTime[i] = 48 ;
+		} else {
+		curTime[i] = bufferH[i] ;
+		}
+
+		i++;
+	}
+   // on_Zero_hoursetcurrent_date_and_time (&hrtc);
 }
 

@@ -15,6 +15,7 @@
 #include "menu.h"
 #include "data.h"
 #include "debug_out.h"
+#include "time.h"
 
 
 //#include "fonts.h"
@@ -518,7 +519,10 @@ void start(void)
 
 	Get_Usonic_distance();
 
-	set_Date();
+	set_Date(29,02,2024);
+	set_Alarm (40,53,1);
+	//set_Time();
+
 
 	int ret = sum ( 1 , 2, 3 , 4 ) ;
 
@@ -535,6 +539,7 @@ void start(void)
 		//Get_time ();
 		get_time_to_comm();
 		print_Line2_F1();
+		print_Line3_F1();
 		fill_menu_data();
 		//Uart_Receive_IRQ_DMA();
 

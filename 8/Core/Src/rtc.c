@@ -59,6 +59,7 @@ void MX_RTC_Init(void)
   /* USER CODE BEGIN Check_RTC_BKUP */
 
   // Проверьте реестр резервного копирования
+
   iSetFlag = 0x5053; // Это значение 0x5053, которое вы будете free
   if( iSetFlag != HAL_RTCEx_BKUPRead(&hrtc, RTC_BKP_DR0))
   {
@@ -107,7 +108,8 @@ void MX_RTC_Init(void)
   /* USER CODE BEGIN RTC_Init 2 */
 
   // Установите время, установите флаг
-  	  HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR0, iSetFlag);
+  //iSetFlag = 0x5053;
+  HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR0, iSetFlag);
   	  // iSetFlag = 0x5053; // Это значение 0x5053, которое вы будете free
   }
 

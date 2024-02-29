@@ -66,8 +66,37 @@ void on_Zero_hoursetcurrent_date_and_time (void){
 
 
 void print_text_Line3_F1(void){
+// вывод параметров будильника
+
+	TFT9341_SetTextColor(TFT9341_CYAN);
+    TFT9341_SetBackColor(TFT9341_BLACK);
+    TFT9341_SetFont(&Font12);
+
+    int y_Pixel = 66 ;
+    int x_pixel_wTime = 10 ;
+    int x_pixel_Time = 60 ;
+    int x_pixel_Date = 150 ;
+
+    char curTime[] = "         ";
+    char curDate[] = "         ";
+
+    char clear[] = "              " ; // 5 + 9
+
+    TFT9341_String( 10, y_Pixel, clear);
+
+    char time[] = "Alarm:";
+    TFT9341_String( x_pixel_wTime, y_Pixel, time);
 
 
+    get_Alarm( (char*)curTime );
+    TFT9341_String( x_pixel_Time, y_Pixel, clear);
+    TFT9341_String( x_pixel_Time, y_Pixel, curTime);
+
+    get_Date ((char*)curDate );
+    TFT9341_String( x_pixel_Date, y_Pixel, clear);
+    TFT9341_String( x_pixel_Date, y_Pixel, curDate);
+
+    on_Zero_hoursetcurrent_date_and_time ();
 
 }
 
