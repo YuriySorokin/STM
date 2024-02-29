@@ -105,6 +105,8 @@ void Error_Handler(void);
 #define NCS_MEMS_SPI_GPIO_Port GPIOC
 #define CS_Pin LL_GPIO_PIN_2
 #define CS_GPIO_Port GPIOC
+#define button_Pin LL_GPIO_PIN_0
+#define button_GPIO_Port GPIOA
 #define MEMS_INT1_Pin LL_GPIO_PIN_1
 #define MEMS_INT1_GPIO_Port GPIOA
 #define VSYNC_Pin LL_GPIO_PIN_4

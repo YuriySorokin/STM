@@ -22,11 +22,13 @@
 #include "stm32f4xx_it.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "LED.h"
+#include "power.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN TD */
-#include "LED.h"
+
 /* USER CODE END TD */
 
 /* Private define ------------------------------------------------------------*/
@@ -305,12 +307,20 @@ void DMA2D_IRQHandler(void)
 /* USER CODE BEGIN 1 */
 void HAL_RTC_AlarmAEventCallback(RTC_HandleTypeDef *hrtc){
 
+
+
+	Led_red_on();
+
+	// delay_Led_on ( circle ) ;
+	set_lowPower();
+
 /*	int circle = 1000 ;
 
 
 		delay_Led_on ( circle ) ;
 	}
 		//
+
 
 
 	while ( circle -- ) {

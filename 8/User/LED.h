@@ -24,6 +24,8 @@ void delay_Led_on( uint32_t );
 void delay_Led_off( uint32_t );
 void Led_red_off(uint32_t );
 void Leds_flash_on_start_led1_led2(void);
+void Led_red_on(void);
+
 
 
 

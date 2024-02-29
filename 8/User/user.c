@@ -16,6 +16,7 @@
 #include "data.h"
 #include "debug_out.h"
 #include "time.h"
+#include "power.h"
 
 
 //#include "fonts.h"
@@ -205,7 +206,7 @@ void TFT9341_ini(uint16_t w_size, uint16_t h_size)
   TFT9341_reset();
   TFT9341_SendCommand(0x01);
   //HAL_Delay(1000);
-  HAL_Delay(1000);
+  HAL_Delay(500);
   //Power Control A
   data[0] = 0x39;
   data[1] = 0x2C;
@@ -323,7 +324,7 @@ void TFT9341_ini(uint16_t w_size, uint16_t h_size)
   TFT9341_SendCommand(0xE1);
   TFT9341_WriteData(data, 15);
   TFT9341_SendCommand(0x11);//Выйдем из спящего режима
-  HAL_Delay(120);
+  HAL_Delay(240);
 	  //Display ON
 	  data[0] = TFT9341_ROTATION;
 	  TFT9341_SendCommand(0x29);
@@ -519,12 +520,12 @@ void start(void)
 
 	Get_Usonic_distance();
 
-	set_Date(29,02,2024);
-	set_Alarm (40,53,1);
+	set_Date(29,02,24);
+	set_Alarm (40,35,3);
 	//set_Time();
 
 
-	int ret = sum ( 1 , 2, 3 , 4 ) ;
+	//int ret = sum ( 1 , 2, 3 , 4 ) ;
 
 	  //while (1){
 
@@ -547,8 +548,10 @@ void start(void)
 		   battery_metter( &battery_value);
 		   print_Line1_F2();
 
-	// Uart_Send_Recive();
 
+		// Uart_Send_Recive();
+
+		   // HAL_PWR_EnterSLEEPMode(PWR_LOWPOWERREGULATOR_ON, PWR_SLEEPENTRY_WFI);
 	}
 
 

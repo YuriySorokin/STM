@@ -26,19 +26,22 @@ void print_text_Line1_F1(void){
 
 void print_text_Line2_F1(void){
 
+	// print time
+
 	TFT9341_SetTextColor(TFT9341_CYAN);
     TFT9341_SetBackColor(TFT9341_BLACK);
-    TFT9341_SetFont(&Font12);
+    //TFT9341_SetFont(&Font12);
+    TFT9341_SetFont(&Font16);
 
     int y_Pixel = 54 ;
     int x_pixel_wTime = 10 ;
-    int x_pixel_Time = 60 ;
-    int x_pixel_Date = 150 ;
+    int x_pixel_Time = 90 ;
+    int x_pixel_Date = 180 ;
 
     char curTime[] = "         ";
     char curDate[] = "         ";
 
-    char clear[] = "              " ; // 5 + 9
+    char clear[] = "        " ; // 5 + 9
 
     TFT9341_String( 10, y_Pixel, clear);
 
@@ -70,17 +73,18 @@ void print_text_Line3_F1(void){
 
 	TFT9341_SetTextColor(TFT9341_CYAN);
     TFT9341_SetBackColor(TFT9341_BLACK);
-    TFT9341_SetFont(&Font12);
+    // TFT9341_SetFont(&Font12);
+    TFT9341_SetFont(&Font16);
 
-    int y_Pixel = 66 ;
+    int y_Pixel = 70 ;
     int x_pixel_wTime = 10 ;
-    int x_pixel_Time = 60 ;
-    int x_pixel_Date = 150 ;
+    int x_pixel_Time = 90 ;
+    int x_pixel_Date = 180 ;
 
     char curTime[] = "         ";
     char curDate[] = "         ";
 
-    char clear[] = "              " ; // 5 + 9
+    char clear[] = "           " ; // 5 + 9
 
     TFT9341_String( 10, y_Pixel, clear);
 
@@ -107,7 +111,7 @@ void print_text_Line4_F1(void){
 
 void print_text_Line1_F2(void){
 
-	uint32_t shiftUp = 30 + 24 ; // смещение строк сверху на дисплее
+	uint32_t shiftUp = 30 + 32 ; // смещение строк сверху на дисплее
 
 	TFT9341_SetTextColor(TFT9341_CYAN);
     TFT9341_SetBackColor(TFT9341_BLACK);
