@@ -10,6 +10,7 @@
 
 
 void set_lowPower(void );
+void set_stop_mode(void);
 
 
 #endif /* POWER_H_ */

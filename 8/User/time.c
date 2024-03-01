@@ -135,7 +135,7 @@ void get_Date (char *curDate){
 		}
 }
 
-void set_Date( uint8_t DD, uint8_t MM, uint8_t YY ){
+void set_Date( uint8_t _DD, uint8_t _MM, uint8_t _YY ){
 
 	//	Deal: up date for one
 	// 1. get date
@@ -146,9 +146,9 @@ void set_Date( uint8_t DD, uint8_t MM, uint8_t YY ){
 
 	HAL_RTC_GetDate(&hrtc, &sDate, RTC_FORMAT_BIN);
 
-	sDate.Year = YY ;
-	sDate.Month = MM ;
-	sDate.Date = DD ;
+	sDate.Year = _YY ;
+	sDate.Month = _MM ;
+	sDate.Date = _DD ;
 
 	HAL_RTC_SetDate( &hrtc, &sDate, RTC_FORMAT_BIN) ;
 

@@ -19,6 +19,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+
 #include "stm32f4xx_it.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -28,6 +29,7 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN TD */
+void SystemClock_Config(void);
 
 /* USER CODE END TD */
 
@@ -212,19 +214,29 @@ void SysTick_Handler(void)
 void EXTI0_IRQHandler(void)
 {
   /* USER CODE BEGIN EXTI0_IRQn 0 */
+	HAL_ResumeTick() ;
+	  SystemClock_Config();
 
+
+
+
+
+	__disable_irq();  // disable all interrupts
   /* USER CODE END EXTI0_IRQn 0 */
   if (LL_EXTI_IsActiveFlag_0_31(LL_EXTI_LINE_0) != RESET)
   {
     LL_EXTI_ClearFlag_0_31(LL_EXTI_LINE_0);
     /* USER CODE BEGIN LL_EXTI_LINE_0 */
 
-    	Led_green_on() ;
+
+    LL_GPIO_TogglePin(LD3_GPIO_Port, LD3_Pin) ;
+
+    // Led_green_on() ;
 
     /* USER CODE END LL_EXTI_LINE_0 */
   }
   /* USER CODE BEGIN EXTI0_IRQn 1 */
-
+	__enable_irq();   // enable all interrupts
   /* USER CODE END EXTI0_IRQn 1 */
 }
 
@@ -234,7 +246,7 @@ void EXTI0_IRQHandler(void)
 void USART1_IRQHandler(void)
 {
   /* USER CODE BEGIN USART1_IRQn 0 */
-
+	HAL_ResumeTick();
   /* USER CODE END USART1_IRQn 0 */
   HAL_UART_IRQHandler(&huart1);
   /* USER CODE BEGIN USART1_IRQn 1 */
@@ -248,7 +260,7 @@ void USART1_IRQHandler(void)
 void RTC_Alarm_IRQHandler(void)
 {
   /* USER CODE BEGIN RTC_Alarm_IRQn 0 */
-
+	HAL_ResumeTick();
   /* USER CODE END RTC_Alarm_IRQn 0 */
   HAL_RTC_AlarmIRQHandler(&hrtc);
   /* USER CODE BEGIN RTC_Alarm_IRQn 1 */
@@ -334,7 +346,7 @@ void HAL_RTC_AlarmAEventCallback(RTC_HandleTypeDef *hrtc){
 	Led_red_on();
 
 	// delay_Led_on ( circle ) ;
-	set_lowPower();
+	 // set_lowPower();
 
 /*	int circle = 1000 ;
 
@@ -374,7 +386,26 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
 	while(1) {__NOP();} ;
 }
 */
+ void interrupts_save (void) {
 
+	 void NVIC_EnableIRQ(IRQn_Type IRQn);
+	 void NVIC_DisableIRQ(IRQn_Type IRQn);
+
+	 // 1. back up interrupt state; `__get_PRIMASK()` returns 0 if interrupts
+	 // are **enabled**, and non-zero if they are **disabled**.
+	 uint8_t interrupts_enabled = (__get_PRIMASK() == 0);
+
+	 // do stuff
+
+	 // 2. Disable interrupts
+	 __disable_irq();
+	 // 3. Restore backed-up-state
+	 if (interrupts_enabled) {
+	     __enable_irq();
+	 }
+
+
+ }
 
 
 

@@ -548,6 +548,11 @@ void start(void)
 		   battery_metter( &battery_value);
 		   print_Line1_F2();
 
+		   //set_lowPower();
+
+		   set_stop_mode();
+		   // set_standby_mode();
+
 
 		// Uart_Send_Recive();
 
