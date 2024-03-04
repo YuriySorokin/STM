@@ -9,7 +9,7 @@
 #include "display.h"
 
 
-enum Menu_number
+enum Menu_line
 {
 	LINE_1 = 24*1,
 	LINE_2 = 24*2,
@@ -57,7 +57,8 @@ void print_text_Line2_F1(void){
     TFT9341_String( x_pixel_Date, y_Pixel, clear);
     TFT9341_String( x_pixel_Date, y_Pixel, curDate);
 
-    on_Zero_hoursetcurrent_date_and_time ();
+    //on_Zero_hoursetcurrent_date_and_time ();
+
 }
 
 

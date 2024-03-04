@@ -549,7 +549,7 @@ void start(void)
 		//Uart_Receive_IRQ_DMA();
 
 
-		   battery_metter( &battery_value);
+		battery_metter( &battery_value);
 		  // print_Line1_F2();
 
 		   //set_lowPower();

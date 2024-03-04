@@ -1,0 +1,4 @@
+#!/bin/bash
+g++ -g -fsanitize=address -o a ./com3.cpp
+
+echo g++ -g -fsanitize=address -o a ./com3.c
