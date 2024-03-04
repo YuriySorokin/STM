@@ -17,6 +17,7 @@
 #include "debug_out.h"
 #include "time.h"
 #include "power.h"
+#include "timer.h"
 
 
 //#include "fonts.h"
@@ -495,6 +496,9 @@ void print_text_distance(void){
     TFT9341_String( 10, 114, str2);
 }
 
+
+
+
 void Get_Usonic_distance(){
 
 	uint32_t distance =0 ;
@@ -550,8 +554,11 @@ void start(void)
 
 		   //set_lowPower();
 
-		   set_stop_mode();
-		   // set_standby_mode();
+		 delay_ms (5);
+
+
+		 set_stop_mode();
+		 //   set_standby_mode();
 
 
 		// Uart_Send_Recive();

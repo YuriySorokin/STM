@@ -19,7 +19,6 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-
 #include "stm32f4xx_it.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -63,6 +62,7 @@ extern HCD_HandleTypeDef hhcd_USB_OTG_HS;
 extern DMA_HandleTypeDef hdma_adc1;
 extern DMA2D_HandleTypeDef hdma2d;
 extern RTC_HandleTypeDef hrtc;
+extern TIM_HandleTypeDef htim1;
 extern DMA_HandleTypeDef hdma_usart1_tx;
 extern DMA_HandleTypeDef hdma_usart1_rx;
 extern UART_HandleTypeDef huart1;
@@ -241,6 +241,20 @@ void EXTI0_IRQHandler(void)
 }
 
 /**
+  * @brief This function handles TIM1 update interrupt and TIM10 global interrupt.
+  */
+void TIM1_UP_TIM10_IRQHandler(void)
+{
+  /* USER CODE BEGIN TIM1_UP_TIM10_IRQn 0 */
+
+  /* USER CODE END TIM1_UP_TIM10_IRQn 0 */
+  HAL_TIM_IRQHandler(&htim1);
+  /* USER CODE BEGIN TIM1_UP_TIM10_IRQn 1 */
+
+  /* USER CODE END TIM1_UP_TIM10_IRQn 1 */
+}
+
+/**
   * @brief This function handles USART1 global interrupt.
   */
 void USART1_IRQHandler(void)
@@ -407,6 +421,13 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
 
  }
 
+ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+ {
+	// HAL_GPIO_TogglePin();
+	//	Led_red_on();
+	//	void HAL_GPIO_TogglePin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
+		Led_red_toogle ();
 
+ }
 
 /* USER CODE END 1 */

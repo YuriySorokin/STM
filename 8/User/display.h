@@ -21,6 +21,8 @@ void get_battery_level ( char*) ;
 
 void on_Zero_hoursetcurrent_date_and_time (void);
 
+void print_text_countDown(void);
+void print_num_countDown(uint32_t num );
 
 
 #endif /* DISPLAY_H_ */
