@@ -536,7 +536,7 @@ void start(void)
 
 		  //transmitUSART_Transmit();
 	  //}
-	while (1){
+	//while (1){
 
 		// receive only one message
 
@@ -550,21 +550,21 @@ void start(void)
 
 
 		   battery_metter( &battery_value);
-		   print_Line1_F2();
+		  // print_Line1_F2();
 
 		   //set_lowPower();
 
-		 delay_ms (5);
+		// delay_ms (5);
 
 
-		 set_stop_mode();
+		// set_stop_mode();
 		 //   set_standby_mode();
 
 
 		// Uart_Send_Recive();
 
 		   // HAL_PWR_EnterSLEEPMode(PWR_LOWPOWERREGULATOR_ON, PWR_SLEEPENTRY_WFI);
-	}
+	//}
 
 
 

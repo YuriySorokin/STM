@@ -144,7 +144,10 @@ void 	print_Line3_F1(void){
 
 
 
-void 	print_Line4_F1(void);
+void 	print_Line4_F1(void){
+
+
+};
 
 void 	print_Line1_F2(void){
 	// * print Line1
@@ -159,7 +162,7 @@ void DrawMenu ( uint8_t count){
 
   switch (count)
   {
-  	  case 1: { count++;
+  	  case 1: { Frame1 () ;count++;
 
   	  } break ;
 
