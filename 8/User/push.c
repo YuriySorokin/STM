@@ -9,7 +9,7 @@
 #include "main.h"
 #include "stm32f4xx.h"
 #include "LED.h"
-#include "power.h"
+//#include
 
 
 uint32_t button(void){
@@ -21,8 +21,8 @@ uint32_t button(void){
 #ifndef STANBY
 	//button_Pin LL_GPIO_PIN_0
 	//button_GPIO_Port
-
-	if( (LL_GPIO_ReadInputPort(button_GPIO_Port) & (1 << 0)) != 0 ) {
+#define button_GPIO_Port GPIOA
+	if( (LL_GPIO_ReadInputPort(GPIOA) & (1 << 0)) != 0 ) {
 	    // на выводе PB10 высокий уровень
 		//if( (LL_GPIO_ReadInputPort(button_GPIO_Port) & (1 << 10)) != 0 ) {
 		key = 1 ;

@@ -208,7 +208,7 @@ void TFT9341_ini(uint16_t w_size, uint16_t h_size)
   TFT9341_reset();
   TFT9341_SendCommand(0x01);
   //HAL_Delay(1000);
-  HAL_Delay(500);
+  HAL_Delay(400);
   //Power Control A
   data[0] = 0x39;
   data[1] = 0x2C;
@@ -554,6 +554,7 @@ void start(void)
 		   print_Line1_F2();
 
 		   //set_lowPower();
+			// HAL_GPIO_WritePin(ENABLE_GPIO_Port, ENABLE_Pin, GPIO_PIN_RESET);
 
 		 delay_ms (5);
 
@@ -561,9 +562,9 @@ void start(void)
 		 set_stop_mode();
 #else
 
-		 LL_PWR_DisableWakeUpPin(ENABLE);
-		 LL_PWR_ClearFlag_WU();
-		 LL_PWR_EnableWakeUpPin(ENABLE);
+	//	 LL_PWR_DisableWakeUpPin(ENABLE);
+	//	 LL_PWR_ClearFlag_WU();
+	//	 LL_PWR_EnableWakeUpPin(ENABLE);
 
 		 //LL_PWR_EnableWakeUpPin( GPIO_PIN_0 );
 		 // SYS_WKUP

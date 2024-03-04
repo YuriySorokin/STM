@@ -4,6 +4,7 @@
  *  Created on: 29 февр. 2024 г.
  *      Author: Yuriy
  */
+#include "main.h"
 #include "power.h"
 #include "stm32f4xx_hal.h"
 
@@ -61,10 +62,17 @@ void set_standby_mode(){
 	 * Здесь   надо сбрасывать флаг до бесконечного цикла:
 	 *     __HAL_PWR_CLEAR_FLAG(PWR_FLAG_WU);
 	 */
-	  __HAL_RCC_PWR_CLK_ENABLE();
+	 //ENABLE_GPIO_Port ; ENABLE_Pin ;
+	//	HAL_GPIO_WritePin(ENABLE_GPIO_Port, ENABLE_Pin, GPIO_PIN_RESET);
+		//HAL_GPIO_WritePin(ENABLE_GPIO_Port, ENABLE_Pin, GPIO_PIN_SET);
+
+
+	__HAL_RCC_PWR_CLK_ENABLE();
 	  HAL_PWR_DisableWakeUpPin(PWR_WAKEUP_PIN1);
 	  __HAL_PWR_CLEAR_FLAG(PWR_FLAG_WU);
 	  HAL_PWR_EnableWakeUpPin(PWR_WAKEUP_PIN1);
+
+
 	  HAL_PWR_EnterSTANDBYMode();
 
 	//HAL_PWR_EnterSTANDBYMode();
