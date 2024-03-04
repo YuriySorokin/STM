@@ -8,6 +8,7 @@
 #ifndef POWER_H_
 #define POWER_H_
 
+#define STANBY
 
 void set_standby_mode(void);
 

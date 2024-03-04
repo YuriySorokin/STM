@@ -7,6 +7,7 @@
 #include "user.h"
 #include "echo.h"
 #include "stm32f4xx_ll_utils.h"
+#include "stm32f4xx_ll_pwr.h"
 #include "stm32f4xx_hal_uart.h"
 
 #include "usart.h"
@@ -556,9 +557,18 @@ void start(void)
 
 		 delay_ms (5);
 
-
+#ifndef STANBY
 		 set_stop_mode();
-		 //   set_standby_mode();
+#else
+
+		 LL_PWR_DisableWakeUpPin(ENABLE);
+		 LL_PWR_ClearFlag_WU();
+		 LL_PWR_EnableWakeUpPin(ENABLE);
+
+		 //LL_PWR_EnableWakeUpPin( GPIO_PIN_0 );
+		 // SYS_WKUP
+		    set_standby_mode();
+#endif
 
 
 		// Uart_Send_Recive();
