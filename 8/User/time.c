@@ -80,7 +80,7 @@ void get_time_to_comm ( void ) { // на экран
 	char bufferM[4];
 	char bufferS[4];
 	char spaces[] = "   ";
-		//char buffer2[32];
+		char buffer2[32] = {0x00};
 
 	extern RTC_HandleTypeDef hrtc ;
 	extern RTC_TimeTypeDef sTime;
@@ -90,19 +90,21 @@ void get_time_to_comm ( void ) { // на экран
 	HAL_RTC_GetDate(&hrtc, &sDate, RTC_FORMAT_BIN);
 
 
-	print_comm3(spaces);
+//	print_comm3(spaces);
 
 
-	sprintf(bufferH, "%2d:", (int)sTime.Hours);
-	print_comm3(bufferH);
+//	sprintf(bufferH, "%2d:", (int)sTime.Hours);
+//	print_comm3(bufferH);
 
-	sprintf(bufferM, "%2d:", (int)sTime.Minutes);
-	print_comm3(bufferM);
+//	sprintf(bufferM, "%2d:", (int)sTime.Minutes);
+//	print_comm3(bufferM);
 
-	sprintf(bufferS, "%2d", (int)sTime.Seconds);
-	print_comm3(bufferS);
+//	sprintf(bufferS, "%2d", (int)sTime.Seconds);
+//	print_comm3(bufferS);
 
-//	HAL_Delay(1000);
+	sprintf (buffer2, "%2d:%2d:%2d",(int)sTime.Seconds, (int)sTime.Minutes, (int)sTime.Hours );
+	print_comm3 (buffer2);
+	//	HAL_Delay(1000);
 
 };
 

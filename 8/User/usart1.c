@@ -92,16 +92,31 @@ void Uart_Receive_IRQ_DMA(void){
 }
 
 
-void print_comm3( char* buffer ){
+void print_comm3( char *buffer ){
+
+	 int sz = 0 ;
+	 char *len = 0;
+
+	 len = buffer ;
+
+	 while ( *(len++) ) {
+		 sz++ ;
+
+	 }
 
 	  while(*buffer)
 	  {
 			//while ( HAL_UART_Transmit_IT(&huart1, (uint8_t*) buffer, 1) != HAL_OK ) { ;}
-		  while ( HAL_UART_Transmit_DMA(&huart1, (uint8_t*) buffer, 1) != HAL_OK ) { ;}
-			(void)*buffer++;
-			//HAL_Delay(2);
+		  while ( HAL_UART_Transmit_DMA(&huart1, (uint8_t*) buffer, sz+1) != HAL_OK ) { ;}
+			while (sz--) {
+				buffer++;
+			}
+			HAL_Delay (5);
+		//HAL_Delay(2);
 			//HAL_UART_Transmit_DMA
 	  }
+	 //HAL_UART_Transmit_DMA(&huart1, (uint8_t*) buffer, 1) ;
+
 	 // Leds_flash_on_start_led1_led2();
 
 }

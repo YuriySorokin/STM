@@ -49,6 +49,7 @@ LPCTSTR sPortName = "COM3";
 
 DCB dcbSerialParams = {0};
 dcbSerialParams.DCBlength=sizeof(dcbSerialParams);
+
 if (!GetCommState(hSerial, &dcbSerialParams))
 {
         cout << "getting state error\n";
@@ -56,7 +57,13 @@ if (!GetCommState(hSerial, &dcbSerialParams))
 
 else { 
         cout << dcbSerialParams.BaudRate << '\n' ;
+        cout << dcbSerialParams.ByteSize  << '\n' ;
+        cout << dcbSerialParams.StopBits  << '\n' ;
+        cout << dcbSerialParams.Parity  << '\n' ;
 }
+    
+
+
 dcbSerialParams.BaudRate=CBR_9600;
 dcbSerialParams.ByteSize=8;
 dcbSerialParams.StopBits=ONESTOPBIT;
@@ -70,8 +77,8 @@ if(!SetCommState(hSerial, &dcbSerialParams))
 
 // запись в порт
 
-    char data[7]  = "qwerty";
-
+    char data[15]  = {0x0};
+    char *cs ;
         DWORD dwBytesWrite = 0 ;
 
     //char buffer[2] ;
@@ -79,18 +86,28 @@ if(!SetCommState(hSerial, &dcbSerialParams))
 
     printf ("write data \n") ;
     if (!WriteFile(hSerial,data,1,&dwBytesWrite, NULL)){ printf("write error \r\n") ; }
-    else { printf ("write %s ok", sPortName );}
+    else { printf ("write %s ok\n", sPortName );}
 
 
-    printf ("read data \n") ;
-    if (!ReadFile(hSerial, data, 16,&dwBytesWrite,NULL)) {
-        printf("read error! \n");
+        printf ("read data \n") ;
+        int ci = 400 ;
+            printf ( "\n reading from port %d times ", ci  ) ;
+
+while ( ci ) {        
+            if (!ReadFile(hSerial, &data, 9,&dwBytesWrite,NULL)) {
+                printf("read error! \n");
+            }
+            else{
+                printf ( "recived string %d :%s , dwB %d\n",ci, data, (int)dwBytesWrite ) ;
+                printf ( "                   ");
+                cs = data ;
+                while ( (*cs) != '\0'){
+                            cout << *cs ;
+                       cs++;
+                }           cout << '\n' ;
+            }
+        ci -- ;
     }
-    else{
-        printf ( " reading from port :  %s \n", data ) ;
-    }
-// чтение из порта
-
 
 
 // закрытие порта
