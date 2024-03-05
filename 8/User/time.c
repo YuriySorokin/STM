@@ -76,10 +76,10 @@ void get_Time (char *curTime){
 void get_time_to_comm ( void ) { // на экран
 
 	//char buffer[11];
-	char bufferH[4];
-	char bufferM[4];
-	char bufferS[4];
-	char spaces[] = "   ";
+//	char bufferH[4];
+//	char bufferM[4];
+//	char bufferS[4];
+//	char spaces[] = "   ";
 		char buffer2[32] = {0x00};
 
 	extern RTC_HandleTypeDef hrtc ;
