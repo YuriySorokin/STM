@@ -115,12 +115,13 @@ int main(void)
   //HAL_RTC_MspInit( &rtcHandle);
 
 
+  HAL_TIM_Base_Start_IT(&htim1);
 
    start();
  // 	  start2 ();
 
 
-   DrawMenu ( 1 );
+
 
   /* USER CODE END 2 */
 
@@ -128,13 +129,11 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-
-
-
-
+	   DrawMenu ( 1 );
+		get_time_to_comm();
 
     /* USER CODE END WHILE */
-    MX_USB_HOST_Process();
+    // MX_USB_HOST_Process();
 
     /* USER CODE BEGIN 3 */
   }

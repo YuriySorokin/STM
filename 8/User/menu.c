@@ -139,12 +139,12 @@ void 	print_Line3_F1(void){
 	 //* print line3
 	 //* 	H: thickness, [mm]
 	 print_text_Line3_F1();
-
 }
 
+void 	print_Line4_F1(void){
 
 
-void 	print_Line4_F1(void);
+};
 
 void 	print_Line1_F2(void){
 	// * print Line1
@@ -152,20 +152,78 @@ void 	print_Line1_F2(void){
 	print_text_Line1_F2();
 };
 
+void print_Line2_F2(void){
+	print_text_Line1_F2();
+}
+
+void print_Line3_F2(void){
+	print_text_Line1_F2();
+}
+void print_Line4_F2(void){
+	print_text_Line1_F2();
+}
 
 
+void Frame2(){
+
+	  /* Frame2
+	 *
+	 * print Line1
+	 *	Battery : level [%]
+	 *
+	 * print Line2
+	 *  Error : [0]
+	 *
+	 * print line3
+	 * 	Net : Ok
+	 *
+	 * print line4
+	 * 	Left before  <  pwd  > Right after
+
+	 * 	Home	< 1 >	Home
+	 *
+	 */
+	print_Line1_F2();
+	print_Line2_F2();
+	print_Line3_F2();
+	print_Line4_F2();
+
+};
+
+void Frame3(void){
+
+}
+void Frame4(void){
+
+}
+void Frame5(void){
+
+}
 
 void DrawMenu ( uint8_t count){
 
   switch (count)
   {
-  	  case 1: { count++;
+  	  case 1: { Frame1 () ;count++;
 
   	  } break ;
 
-  	  case 2: { count++; count ++;
+  	  case 2: { Frame2 (); count++; ;
 
   	  } break ;
+
+  	  case 3: { Frame3 (); count++; ;
+
+  	  } break ;
+
+  	  case 4: { Frame4 (); count++; ;
+
+  	  } break ;
+
+  	  case 5: { Frame5 (); count++; ;
+
+  	  } break ;
+
   	  default: break ;
   }
 

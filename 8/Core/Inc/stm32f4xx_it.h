@@ -56,6 +56,7 @@ void DebugMon_Handler(void);
 void PendSV_Handler(void);
 void SysTick_Handler(void);
 void EXTI0_IRQHandler(void);
+void TIM1_UP_TIM10_IRQHandler(void);
 void USART1_IRQHandler(void);
 void RTC_Alarm_IRQHandler(void);
 void DMA2_Stream0_IRQHandler(void);

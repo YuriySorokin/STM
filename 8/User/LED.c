@@ -33,6 +33,13 @@ void Led_red_off(uint32_t Delay){
 		HAL_GPIO_WritePin(LD4_GPIO_Port, LD4_Pin, GPIO_PIN_RESET);
 	}
 }
+
+void Led_red_toogle (){
+
+	HAL_GPIO_TogglePin(LD4_GPIO_Port, LD4_Pin);
+
+	}
+
 void LedOff(void){
 
 	HAL_GPIO_WritePin(LD3_GPIO_Port, LD3_Pin, GPIO_PIN_RESET);

@@ -17,6 +17,7 @@
 #include "debug_out.h"
 #include "time.h"
 #include "power.h"
+#include "timer.h"
 
 
 //#include "fonts.h"
@@ -495,6 +496,9 @@ void print_text_distance(void){
     TFT9341_String( 10, 114, str2);
 }
 
+
+
+
 void Get_Usonic_distance(){
 
 	uint32_t distance =0 ;
@@ -532,7 +536,7 @@ void start(void)
 
 		  //transmitUSART_Transmit();
 	  //}
-	while (1){
+	//while (1){
 
 		// receive only one message
 
@@ -545,14 +549,22 @@ void start(void)
 		//Uart_Receive_IRQ_DMA();
 
 
-		   battery_metter( &battery_value);
-		   print_Line1_F2();
+		battery_metter( &battery_value);
+		  // print_Line1_F2();
+
+		   //set_lowPower();
+
+		// delay_ms (5);
+
+
+		// set_stop_mode();
+		 //   set_standby_mode();
 
 
 		// Uart_Send_Recive();
 
 		   // HAL_PWR_EnterSLEEPMode(PWR_LOWPOWERREGULATOR_ON, PWR_SLEEPENTRY_WFI);
-	}
+	//}
 
 
 
