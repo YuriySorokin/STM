@@ -1,5 +1,6 @@
 #ifdef __MINGW32__
 #include <windows.h>
+#include <winnt.h>
 #endif
 #ifdef __linux
 #include <sys/types.h>
@@ -15,8 +16,8 @@ int main(){
 
     using namespace std;
      
-
-     vector<string> msg{"hello","c++","world"};
+/*
+     vector<string> msg{"vecor 10 ","vector 30 ","vector 3"};
 
 
 
@@ -26,33 +27,74 @@ int main(){
         std::cout << word << ",";
     }
         std::cout << endl << " " ;
-
-    printf ("test string");
-    std:: cout << " test string " ;
+*/
+   // printf ("test string");
+   // std:: cout << " test string " ;
     
-HANDLE hSerial = CreateFile("COM3",GENERIC_READ | GENERIC_WRITE,0,NULL,OPEN_EXISTING,0,NULL);
-if (hSerial == INVALID_HANDLE_VALUE) {
-printf("Error opening port\r\n");
-return -1;
+    //typedef CHAR TCHAR;
+    //typedef const TCHAR *LPCTSTR;
+
+HANDLE hSerial ;
+LPCTSTR sPortName = "COM3"; 
+
+    printf ("Start open %s \n", sPortName );
+       hSerial = CreateFile(sPortName,GENERIC_READ | GENERIC_WRITE,0,NULL,OPEN_EXISTING,0,NULL);
+    if (hSerial == INVALID_HANDLE_VALUE) {
+                                        printf("Error opening port 1 \r\n");
+                                        return -1;
+    }
+    else {
+    printf ("port opened \n");
+    }
+
+DCB dcbSerialParams = {0};
+dcbSerialParams.DCBlength=sizeof(dcbSerialParams);
+if (!GetCommState(hSerial, &dcbSerialParams))
+{
+        cout << "getting state error\n";
 }
 
-// запись в порт
-    char * data ;
-    data [0] = 0x01;
-    DWORD dwBytesWrite = 0 ;
-    if (!WriteFile(hSerial,data,1,&dwBytesWrite, NULL)){ printf("write error \r\n") ; }
-// чтение из порта
+else { 
+        cout << dcbSerialParams.BaudRate << '\n' ;
+}
+dcbSerialParams.BaudRate=CBR_9600;
+dcbSerialParams.ByteSize=8;
+dcbSerialParams.StopBits=ONESTOPBIT;
+dcbSerialParams.Parity=NOPARITY;
+if(!SetCommState(hSerial, &dcbSerialParams))
+{
+        cout << "error setting serial port state\n";
+}
 
-    char * buffer ;
-    if (!ReadFile(hSerial, buffer, 1,&dwBytesWrite,NULL)) {
-        printf("read error");
+ 
+
+// запись в порт
+
+    char data[7]  = "qwerty";
+
+        DWORD dwBytesWrite = 0 ;
+
+    //char buffer[2] ;
+
+
+    printf ("write data \n") ;
+    if (!WriteFile(hSerial,data,1,&dwBytesWrite, NULL)){ printf("write error \r\n") ; }
+    else { printf ("write %s ok", sPortName );}
+
+
+    printf ("read data \n") ;
+    if (!ReadFile(hSerial, data, 16,&dwBytesWrite,NULL)) {
+        printf("read error! \n");
     }
     else{
-        printf ( "%s", buffer) ;
+        printf ( " reading from port :  %s \n", data ) ;
     }
+// чтение из порта
+
+
 
 // закрытие порта
-
+printf ("close port \n");
 CloseHandle(hSerial);
 
 
