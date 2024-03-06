@@ -60,7 +60,7 @@
 RTC_HandleTypeDef rtcHandle;
 
 static USHORT usRegInputStart = REG_INPUT_START;
-static USHORT usRegInputBuf[REG_INPUT_NREGS] = {'M', '2', 'd', 'b', 'u', 's', 0, 0};
+static USHORT usRegInputBuf[REG_INPUT_NREGS] = {'M', '2', 'd', 'b', 'u', 's', '4', '5'};
 
 //TIM_HandleTypeDef htim1;
 
