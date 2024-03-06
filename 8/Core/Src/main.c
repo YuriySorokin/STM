@@ -126,7 +126,7 @@ int main(void)
   MT_PORT_SetTimerModule(&htim3);
   MT_PORT_SetUartModule(&huart1);
   eMBErrorCode eStatus;
-  eStatus = eMBInit(MB_RTU, 0x0A, 0, 9600, MB_PAR_NONE);
+  eStatus = eMBInit(MB_RTU, 0x0A, 0, 19200, MB_PAR_NONE);
   eStatus = eMBEnable();
   if (eStatus != MB_ENOERR)
   {

@@ -218,10 +218,6 @@ void EXTI0_IRQHandler(void)
 	HAL_ResumeTick() ;
 	  SystemClock_Config();
 
-
-
-
-
 	__disable_irq();  // disable all interrupts
   /* USER CODE END EXTI0_IRQn 0 */
   if (LL_EXTI_IsActiveFlag_0_31(LL_EXTI_LINE_0) != RESET)
