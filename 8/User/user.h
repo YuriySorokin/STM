@@ -15,7 +15,7 @@
 #include "menu.h"
 #include "time.h"
 #include "bat.h"
-
+#include "mb.h"
 
 void start(void);
 void TFT9341_ini(uint16_t, uint16_t);

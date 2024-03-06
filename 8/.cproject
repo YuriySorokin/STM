@@ -45,6 +45,7 @@
 								</option>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.option.includepaths.1091925416" name="Include paths (-I)" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.option.includepaths" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="../Modules/Modbus/Port"/>
+									<listOptionValue builtIn="false" value="../Modules/Modbus/include/functions"/>
 									<listOptionValue builtIn="false" value="../Modules/Modbus/rtu"/>
 									<listOptionValue builtIn="false" value="../Modules/Modbus/ascii"/>
 									<listOptionValue builtIn="false" value="../Modules/Modbus/include"/>

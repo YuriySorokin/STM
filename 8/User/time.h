@@ -24,4 +24,5 @@ void get_Alarm (char *);
 
 void set_Date (uint8_t, uint8_t, uint8_t);
 void set_Alarm (uint8_t, uint8_t,uint8_t );
+
 #endif /* TIME_H_ */
