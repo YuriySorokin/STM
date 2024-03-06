@@ -10,6 +10,9 @@
 #include <vector>
 #include <iostream>
 #include <string>
+#include <conio.h>
+#include <unistd.h>
+#include <fcntl.h>
 
 
 int main(){
@@ -44,7 +47,7 @@ LPCTSTR sPortName = "COM3";
                                         return -1;
     }
     else {
-    printf ("port opened \n");
+    printf ("port opened \n"); 
     }
 
 DCB dcbSerialParams = {0};
@@ -80,8 +83,10 @@ if(!SetCommState(hSerial, &dcbSerialParams))
     char data[15]  = {0x0};
     char *cs ;
         DWORD dwBytesWrite = 0 ;
-
+    int key = {0x0};
+    //char chkey;
     //char buffer[2] ;
+    
 
 
     printf ("write data \n") ;
@@ -90,15 +95,25 @@ if(!SetCommState(hSerial, &dcbSerialParams))
 
 
         printf ("read data \n") ;
-        int ci = 400 ;
+        int ci = 20 ;
             printf ( "\n reading from port %d times ", ci  ) ;
+    
+    // 
+    // fcntl(stdin, F_SETFL, fcntl(0, F_GETFL) | O_NONBLOCK);
 
 while ( ci ) {        
             if (!ReadFile(hSerial, &data, 9,&dwBytesWrite,NULL)) {
                 printf("read error! \n");
             }
             else{
-                printf ( "recived string %d :%s , dwB %d\n",ci, data, (int)dwBytesWrite ) ;
+                
+                //key = getch(); //without enter
+                     
+               // key = tolower (fgetc (stdin)); // enter
+                if (key ==(int)'c') { break; }
+
+                cout << key ;
+                printf ( "recived string %d : %s  , dwB %d\n",ci, data, (int)dwBytesWrite ) ;
                 printf ( "                   ");
                 cs = data ;
                 while ( (*cs) != '\0'){

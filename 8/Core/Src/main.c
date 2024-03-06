@@ -111,6 +111,7 @@ int main(void)
   MX_USB_HOST_Init();
   MX_RTC_Init();
   MX_ADC1_Init();
+  MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
   //HAL_RTC_MspInit( &rtcHandle);
 
@@ -133,7 +134,7 @@ int main(void)
 		get_time_to_comm();
 
     /* USER CODE END WHILE */
-    // MX_USB_HOST_Process();
+    MX_USB_HOST_Process();
 
     /* USER CODE BEGIN 3 */
   }

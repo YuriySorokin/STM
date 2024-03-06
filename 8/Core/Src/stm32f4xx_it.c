@@ -63,6 +63,7 @@ extern DMA_HandleTypeDef hdma_adc1;
 extern DMA2D_HandleTypeDef hdma2d;
 extern RTC_HandleTypeDef hrtc;
 extern TIM_HandleTypeDef htim1;
+extern TIM_HandleTypeDef htim3;
 extern DMA_HandleTypeDef hdma_usart1_tx;
 extern DMA_HandleTypeDef hdma_usart1_rx;
 extern UART_HandleTypeDef huart1;
@@ -255,6 +256,20 @@ void TIM1_UP_TIM10_IRQHandler(void)
 }
 
 /**
+  * @brief This function handles TIM3 global interrupt.
+  */
+void TIM3_IRQHandler(void)
+{
+  /* USER CODE BEGIN TIM3_IRQn 0 */
+
+  /* USER CODE END TIM3_IRQn 0 */
+  HAL_TIM_IRQHandler(&htim3);
+  /* USER CODE BEGIN TIM3_IRQn 1 */
+
+  /* USER CODE END TIM3_IRQn 1 */
+}
+
+/**
   * @brief This function handles USART1 global interrupt.
   */
 void USART1_IRQHandler(void)
@@ -420,7 +435,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
 
 
  }
-
+/*
  void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
  {
 	// HAL_GPIO_TogglePin();
@@ -429,5 +444,6 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
 		Led_red_toogle ();
 
  }
+*/
 
 /* USER CODE END 1 */
