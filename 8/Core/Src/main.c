@@ -60,7 +60,7 @@
 RTC_HandleTypeDef rtcHandle;
 
 static USHORT usRegInputStart = REG_INPUT_START;
-static USHORT usRegInputBuf[REG_INPUT_NREGS] = {'M', 'o', 'd', 'b', 'u', 's', 0, 0};
+static USHORT usRegInputBuf[REG_INPUT_NREGS] = {'M', '2', 'd', 'b', 'u', 's', 0, 0};
 
 //TIM_HandleTypeDef htim1;
 
@@ -126,7 +126,7 @@ int main(void)
   MT_PORT_SetTimerModule(&htim3);
   MT_PORT_SetUartModule(&huart1);
   eMBErrorCode eStatus;
-  eStatus = eMBInit(MB_RTU, 0x0A, 0, 19200, MB_PAR_NONE);
+  eStatus = eMBInit(MB_RTU, 0x0A, 0, 9600, MB_PAR_NONE);
   eStatus = eMBEnable();
   if (eStatus != MB_ENOERR)
   {
@@ -149,7 +149,7 @@ int main(void)
   while (1)
   {
 	   DrawMenu ( 1 );
-	   get_time_to_comm();
+	  // get_time_to_comm();
 
     /* USER CODE END WHILE */
     MX_USB_HOST_Process();

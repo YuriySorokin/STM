@@ -542,7 +542,7 @@ void start(void)
 
 		// wait in circle
 		//Get_time ();
-		get_time_to_comm();
+//		get_time_to_comm();
 		print_Line2_F1();
 		print_Line3_F1();
 		fill_menu_data();
