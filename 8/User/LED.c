@@ -22,6 +22,12 @@ void Led_green_on(void){
 
 }
 
+void Led_green_off(void){
+
+	HAL_GPIO_WritePin(LD3_GPIO_Port, LD3_Pin, GPIO_PIN_RESET);
+
+}
+
 void Led_red_on(void){
 	HAL_GPIO_WritePin(LD4_GPIO_Port, LD4_Pin, GPIO_PIN_SET);
 }
@@ -62,6 +68,18 @@ void delay_Led_on( uint32_t Delay ) {
   		LedOn();
   	}
 }
+
+void delay_Led_Green_on( uint32_t Delay ) {
+
+
+  	for ( uint32_t i = Delay ; i < Delay ; i++)  {
+  		Led_green_on();
+  	}
+
+  	Led_green_off();
+}
+
+
 void Leds_flash_on_start_led1_led2(void){
 
 		LED1_ON();

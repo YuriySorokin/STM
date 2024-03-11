@@ -30,6 +30,7 @@
 #include "usb_host.h"
 #include "gpio.h"
 #include "fmc.h"
+#include "display.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -139,7 +140,7 @@ int main(void)
    start();
  // 	  start2 ();
 
-
+   //eMBPoll();
 
 
   /* USER CODE END 2 */
@@ -148,7 +149,9 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	   //DrawMenu ( 1 );
+
+	  //print_text_Line2_F1();
+	  // DrawMenu ( 1 );
 	  // get_time_to_comm();
 
     /* USER CODE END WHILE */
@@ -158,7 +161,7 @@ int main(void)
     eMBPoll();
        usRegInputBuf[REG_INPUT_NREGS - 2] =  HAL_GetTick() / 1000;
        usRegInputBuf[REG_INPUT_NREGS - 1] =  HAL_GetTick();
-
+      // HAL_Delay (3);
 
   }
   /* USER CODE END 3 */

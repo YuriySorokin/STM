@@ -202,6 +202,24 @@ static void TFT9341_WriteData(uint8_t* buff, size_t buff_size) {
 	}
 }
 
+static void TFT9341_WriteData_DMA(uint8_t* buff, size_t buff_size) {
+	DC_DATA();
+	while(buff_size > 0) {
+		uint16_t chunk_size = buff_size > 32768 ? 32768 : buff_size;
+		//HAL_SPI_Transmit(&hspi5, buff, chunk_size, HAL_MAX_DELAY);
+
+		//отключаем канал DMA после предыдущей передачи данных
+		//  DMA1_Channel3->CCR &= ~(1 << DMA_CCR_EN_Pos);
+
+
+
+		HAL_SPI_Transmit_DMA( &hspi5, buff, chunk_size) ;
+		buff += chunk_size;
+		buff_size -= chunk_size;
+	}
+}
+
+
 
 void TFT9341_ini(uint16_t w_size, uint16_t h_size)
 {
