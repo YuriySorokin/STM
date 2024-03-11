@@ -173,13 +173,16 @@ void Delay_ms (uint32_t delay ){
 void TFT9341_SendCommand(uint8_t cmd)
 {
   DC_COMMAND();
-  HAL_SPI_Transmit (&hspi5, &cmd, 1, 5000);
+  // HAL_SPI_Transmit (&hspi5, &cmd, 1, 5000);
+  HAL_SPI_Transmit_DMA( &hspi5, &cmd, 1) ;
+
 }
 
 void TFT9341_SendData(uint8_t dt)
 {
 	DC_DATA();
-	HAL_SPI_Transmit (&hspi5, &dt, 1, 5000);
+	//HAL_SPI_Transmit (&hspi5, &dt, 1, 5000);
+	HAL_SPI_Transmit_DMA( &hspi5, &dt, 1) ;
 }
 
 void TFT9341_reset(void)
@@ -193,6 +196,7 @@ static void TFT9341_WriteData(uint8_t* buff, size_t buff_size) {
 	while(buff_size > 0) {
 		uint16_t chunk_size = buff_size > 32768 ? 32768 : buff_size;
 		HAL_SPI_Transmit(&hspi5, buff, chunk_size, HAL_MAX_DELAY);
+		//HAL_SPI_Transmit_DMA( &hspi5, buff, chunk_size) ;
 		buff += chunk_size;
 		buff_size -= chunk_size;
 	}

@@ -60,7 +60,7 @@
 RTC_HandleTypeDef rtcHandle;
 
 static USHORT usRegInputStart = REG_INPUT_START;
-static USHORT usRegInputBuf[REG_INPUT_NREGS] = {'M', '2', 'd', 'b', 'u', 's', '4', '5'};
+static USHORT usRegInputBuf[REG_INPUT_NREGS] = {'M', 'o', 'd', 'b', 'u', 's', 0x0, 0x0};
 
 //TIM_HandleTypeDef htim1;
 
@@ -126,7 +126,7 @@ int main(void)
   MT_PORT_SetTimerModule(&htim3);
   MT_PORT_SetUartModule(&huart1);
   eMBErrorCode eStatus;
-  eStatus = eMBInit(MB_RTU, 0x0A, 0, 19200, MB_PAR_NONE);
+  eStatus = eMBInit(MB_RTU, 0x0A, 0, 9600, MB_PAR_NONE);
   eStatus = eMBEnable();
   if (eStatus != MB_ENOERR)
   {
@@ -148,7 +148,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	   DrawMenu ( 1 );
+	   //DrawMenu ( 1 );
 	  // get_time_to_comm();
 
     /* USER CODE END WHILE */
@@ -158,6 +158,8 @@ int main(void)
     eMBPoll();
        usRegInputBuf[REG_INPUT_NREGS - 2] =  HAL_GetTick() / 1000;
        usRegInputBuf[REG_INPUT_NREGS - 1] =  HAL_GetTick();
+
+
   }
   /* USER CODE END 3 */
 }

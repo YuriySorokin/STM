@@ -62,6 +62,7 @@ extern HCD_HandleTypeDef hhcd_USB_OTG_HS;
 extern DMA_HandleTypeDef hdma_adc1;
 extern DMA2D_HandleTypeDef hdma2d;
 extern RTC_HandleTypeDef hrtc;
+extern DMA_HandleTypeDef hdma_spi5_tx;
 extern TIM_HandleTypeDef htim1;
 extern TIM_HandleTypeDef htim3;
 extern DMA_HandleTypeDef hdma_usart1_tx;
@@ -322,6 +323,20 @@ void DMA2_Stream2_IRQHandler(void)
 }
 
 /**
+  * @brief This function handles DMA2 stream4 global interrupt.
+  */
+void DMA2_Stream4_IRQHandler(void)
+{
+  /* USER CODE BEGIN DMA2_Stream4_IRQn 0 */
+
+  /* USER CODE END DMA2_Stream4_IRQn 0 */
+  HAL_DMA_IRQHandler(&hdma_spi5_tx);
+  /* USER CODE BEGIN DMA2_Stream4_IRQn 1 */
+
+  /* USER CODE END DMA2_Stream4_IRQn 1 */
+}
+
+/**
   * @brief This function handles DMA2 stream7 global interrupt.
   */
 void DMA2_Stream7_IRQHandler(void)
@@ -441,5 +456,16 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
 
  }
 */
+ void HAL_SPI_TxHalfCpltCallback(SPI_HandleTypeDef *hspi){
+
+	 delay_Led_on(50);
+
+
+
+ }
+
+
+
+ //delay_Led_on
 
 /* USER CODE END 1 */
