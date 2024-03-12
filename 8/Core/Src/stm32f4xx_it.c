@@ -24,6 +24,10 @@
 /* USER CODE BEGIN Includes */
 #include "LED.h"
 #include "power.h"
+#include "user.h"
+
+ mainEventType main_Event ;
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -226,9 +230,9 @@ void EXTI0_IRQHandler(void)
     LL_EXTI_ClearFlag_0_31(LL_EXTI_LINE_0);
     /* USER CODE BEGIN LL_EXTI_LINE_0 */
 
-
     LL_GPIO_TogglePin(LD3_GPIO_Port, LD3_Pin) ;
-
+     //if ( main_Event == key_PRESSED )     LL_GPIO_TogglePin(LD3_GPIO_Port, LD3_Pin) ;
+    main_Event = key_PRESSED ;
     // Led_green_on() ;
 
     /* USER CODE END LL_EXTI_LINE_0 */

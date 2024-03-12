@@ -9,6 +9,10 @@
 #define SRC_DATA_H_
 
 #include "main.h"
+#include "usart1.h"
+#include "string.h"
+
+void fill_menu_init (void) ;
 
 
 enum netName {
@@ -26,7 +30,21 @@ enum netStatus {
 	Falt = 1
 };
 
+typedef struct {
 
+	uint8_t frame_n ;
+	char name[15];
+	char znach[15];
+	uint8_t pos_n[5];
+	uint8_t pos_n_x[5];
+	uint8_t pos_n_y[5];
+
+	uint8_t pos_z[5];
+	uint8_t pos_z_x[5];
+	uint8_t pos_z_y[5];
+
+
+} MenuStruct ;
 
 typedef struct {
 	uint8_t firmware_name[12] ;
@@ -46,6 +64,9 @@ typedef struct {
 	uint8_t net_RS_addres;
 
 } Menu_Data ;
+
+
+
 
 
 #endif /* SRC_DATA_H_ */

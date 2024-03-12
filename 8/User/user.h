@@ -53,6 +53,17 @@ extern SPI_HandleTypeDef hspi5;
 //extern RNG_HandleTypeDef hrng;
 
 
+typedef enum
+{
+    main_READY,                 /*!< Startup finished. */
+    key_PRESSED,          		/*!< change screen. */
+    uart_RECIEVED,				/*!< Execute send*/
+    mon_REFRESH              	/*!< Execute refresh display. */
+} mainEventType;
+
+//mainEventType main_Event = 0 ;
+
+
 #define RESET_ACTIVE() LL_GPIO_ResetOutputPin(GPIOD, LL_GPIO_PIN_12)
 #define RESET_IDLE() LL_GPIO_SetOutputPin(GPIOD, LL_GPIO_PIN_12)
 #define CS_ACTIVE() LL_GPIO_ResetOutputPin(GPIOC, LL_GPIO_PIN_2)
@@ -84,6 +95,8 @@ extern SPI_HandleTypeDef hspi5;
 #define TFT9341_WHITE   0xFFFF
 //-------------------------------------------------------------------
 #define swap(a,b) {int16_t t=a;a=b;b=t;}
+
+
 
 
 #endif /* USER_H_ */

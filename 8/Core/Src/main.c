@@ -60,6 +60,8 @@
 /* USER CODE BEGIN PV */
 RTC_HandleTypeDef rtcHandle;
 
+uint8_t errno = 0 ;
+uint8_t active_window = 0 ;
 
 
 

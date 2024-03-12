@@ -18,6 +18,7 @@
 #include "time.h"
 #include "power.h"
 #include "timer.h"
+#include "screen.h"
 
 
 //#include "fonts.h"
@@ -536,19 +537,13 @@ void Get_Usonic_distance(){
 }
 
 
-typedef enum
-{
-    main_READY,                 /*!< Startup finished. */
-    key_PRESSED,          		/*!< change screen. */
-    uart_RECIEVED,				/*!< Execute send*/
-    mon_REFRESH              	/*!< Execute refresh display. */
-} mainEventType;
+
 
 
 void start(void)
 {
 
-	mainEventType main_Event = 0 ;
+	//extern mainEventType main_Event = 0 ;
 
 	float  battery_value  = 0 ;
 
@@ -577,9 +572,14 @@ void start(void)
 		// wait in circle
 		//Get_time ();
 //		get_time_to_comm();
-		print_Line2_F1();
-		print_Line3_F1();
-		fill_menu_data();
+	fill_menu_init() ;
+	fill_menu_data();
+	print_screen();
+
+
+		 // print_Line2_F1();
+		 // print_Line3_F1();
+
 		//Uart_Receive_IRQ_DMA();
 
 
@@ -600,32 +600,36 @@ void start(void)
 		   // HAL_PWR_EnterSLEEPMode(PWR_LOWPOWERREGULATOR_ON, PWR_SLEEPENTRY_WFI);
 	//}
 
-        switch ( main_Event )
-        {
-        	case main_READY: {
+		extern 		 mainEventType main_Event ;
 
-        		}
-            	break;
 
-        	case key_PRESSED:{
+		while ( 1 ) {
 
-        		}
-        		break;
+				switch ( main_Event )
+					{
+					case main_READY: {
 
-        	case uart_RECIEVED: {
+							}
+							break;
 
-        		}
-            	break;
+					case key_PRESSED:{
+								move_next_window () ; main_Event = mon_REFRESH ;
+							}
+							break;
 
-        	case mon_REFRESH: {
+					case uart_RECIEVED: {
 
-        		}
-        	break;
+								}
+							break;
 
-        default : break ;
-        }
-
-}
+					case mon_REFRESH: {
+										print_screen() ; main_Event = main_READY ;
+									}
+							break;
+					default : break ;
+					}
+			}
+	}
 
 void Dispaly_init(void){
 

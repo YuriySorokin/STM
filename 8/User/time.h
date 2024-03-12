@@ -8,7 +8,7 @@
 #ifndef TIME_H_
 #define TIME_H_
 
-
+#include "main.h"
 
 
 
@@ -22,7 +22,7 @@ void get_time_to_comm ( void ) ; // get time and print it to comm3 with Zero ins
 void set_Time (void);
 void get_Alarm (char *);
 
-void set_Date (uint8_t, uint8_t, uint8_t);
-void set_Alarm (uint8_t, uint8_t,uint8_t );
+void set_Date ( uint8_t, uint8_t, uint8_t );
+void set_Alarm ( uint8_t, uint8_t,uint8_t );
 
 #endif /* TIME_H_ */
