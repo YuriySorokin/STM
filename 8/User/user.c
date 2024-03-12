@@ -201,7 +201,7 @@ static void TFT9341_WriteData(uint8_t* buff, size_t buff_size) {
 		buff_size -= chunk_size;
 	}
 }
-
+/*
 static void TFT9341_WriteData_DMA(uint8_t* buff, size_t buff_size) {
 	DC_DATA();
 	while(buff_size > 0) {
@@ -219,7 +219,7 @@ static void TFT9341_WriteData_DMA(uint8_t* buff, size_t buff_size) {
 	}
 }
 
-
+*/
 
 void TFT9341_ini(uint16_t w_size, uint16_t h_size)
 {
@@ -535,8 +535,20 @@ void Get_Usonic_distance(){
 
 }
 
+
+typedef enum
+{
+    main_READY,                 /*!< Startup finished. */
+    key_PRESSED,          		/*!< change screen. */
+    uart_RECIEVED,				/*!< Execute send*/
+    mon_REFRESH              	/*!< Execute refresh display. */
+} mainEventType;
+
+
 void start(void)
 {
+
+	mainEventType main_Event = 0 ;
 
 	float  battery_value  = 0 ;
 
@@ -588,7 +600,30 @@ void start(void)
 		   // HAL_PWR_EnterSLEEPMode(PWR_LOWPOWERREGULATOR_ON, PWR_SLEEPENTRY_WFI);
 	//}
 
+        switch ( main_Event )
+        {
+        	case main_READY: {
 
+        		}
+            	break;
+
+        	case key_PRESSED:{
+
+        		}
+        		break;
+
+        	case uart_RECIEVED: {
+
+        		}
+            	break;
+
+        	case mon_REFRESH: {
+
+        		}
+        	break;
+
+        default : break ;
+        }
 
 }
 

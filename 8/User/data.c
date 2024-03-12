@@ -7,7 +7,7 @@
 #include "data.h"
 #include "usart1.h"
 
-
+Menu_Data Datamenu;
 
 void fill_string(uint8_t* destString, uint8_t* string ){
 
@@ -26,7 +26,9 @@ void fill_menu_data (void){
 	//uint8_t count_size = 0;
 	uint8_t string[] = "one";
 
-	Menu_Data Datamenu;
+	// Menu_Data Datamenu; // move to Global
+
+	extern Menu_Data Datamenu; ;
 
 	Datamenu.Net_name = RS485 ;
 	Datamenu.V_sound = 4550 ;

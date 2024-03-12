@@ -30,12 +30,12 @@
 #include "usb_host.h"
 #include "gpio.h"
 #include "fmc.h"
-#include "display.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "user.h"
 #include "mb.h"
+#include "mt_port.h"
 
 /* USER CODE END Includes */
 
@@ -59,6 +59,9 @@
 
 /* USER CODE BEGIN PV */
 RTC_HandleTypeDef rtcHandle;
+
+
+
 
 static USHORT usRegInputStart = REG_INPUT_START;
 static USHORT usRegInputBuf[REG_INPUT_NREGS] = {'M', 'o', 'd', 'b', 'u', 's', 0x0, 0x0};
@@ -126,6 +129,7 @@ int main(void)
 
   MT_PORT_SetTimerModule(&htim3);
   MT_PORT_SetUartModule(&huart1);
+
   eMBErrorCode eStatus;
   eStatus = eMBInit(MB_RTU, 0x0A, 0, 9600, MB_PAR_NONE);
   eStatus = eMBEnable();
