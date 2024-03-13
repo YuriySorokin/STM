@@ -27,6 +27,9 @@
 #include "user.h"
 
  mainEventType main_Event ;
+ keyStatusType key =  key_RELEAS;
+
+ uint32_t FlagIRQ = 0 ;
 
 /* USER CODE END Includes */
 
@@ -220,8 +223,8 @@ void SysTick_Handler(void)
 void EXTI0_IRQHandler(void)
 {
   /* USER CODE BEGIN EXTI0_IRQn 0 */
-	HAL_ResumeTick() ;
-	  SystemClock_Config();
+	//  HAL_ResumeTick() ; 			// для пробужнения из глубокого сна включить
+	//  SystemClock_Config();		// выстаыить щзаново системный таймер
 
 	__disable_irq();  // disable all interrupts
   /* USER CODE END EXTI0_IRQn 0 */
@@ -230,9 +233,20 @@ void EXTI0_IRQHandler(void)
     LL_EXTI_ClearFlag_0_31(LL_EXTI_LINE_0);
     /* USER CODE BEGIN LL_EXTI_LINE_0 */
 
-    LL_GPIO_TogglePin(LD3_GPIO_Port, LD3_Pin) ;
-     //if ( main_Event == key_PRESSED )     LL_GPIO_TogglePin(LD3_GPIO_Port, LD3_Pin) ;
-    main_Event = key_PRESSED ;
+    FlagIRQ += 1 ;
+     LL_GPIO_TogglePin(LD4_GPIO_Port, LD4_Pin) ;
+     //main_Event = key_PRESSED ;
+
+
+    // LL_GPIO_TogglePin(LD3_GPIO_Port, LD3_Pin) ;
+   /*  if ( key == key_RELEAS)   {  LL_GPIO_TogglePin(LD3_GPIO_Port, LD3_Pin) ;
+     	 	 	 	 	 	 	 	 key = key_PRESS ;
+     	 	 	 FlagIRQ = 2 ;
+     }
+    */
+    // 	 	 	 	 	 	 	 	 	   main_Event = main_READY ;
+    // }
+
     // Led_green_on() ;
 
     /* USER CODE END LL_EXTI_LINE_0 */

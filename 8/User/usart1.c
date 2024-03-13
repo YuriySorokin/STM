@@ -107,11 +107,11 @@ void print_comm3( char *buffer ){
 	  while(*buffer)
 	  {
 			//while ( HAL_UART_Transmit_IT(&huart1, (uint8_t*) buffer, 1) != HAL_OK ) { ;}
-		  while ( HAL_UART_Transmit_DMA(&huart1, (uint8_t*) buffer, sz+1) != HAL_OK ) { ;}
+		  while ( HAL_UART_Transmit_DMA(&huart1, (uint8_t*) buffer, sz) != HAL_OK ) { ;}
 			while (sz--) {
 				buffer++;
 			}
-			HAL_Delay (5);
+			HAL_Delay (4);
 		//HAL_Delay(2);
 			//HAL_UART_Transmit_DMA
 	  }

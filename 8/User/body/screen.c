@@ -11,7 +11,7 @@
 extern uint8_t active_window ;
 
 
-void move_next_window () {
+void move_next_window (void) {
 
 	 // от 0 до 4
 	uint8_t  n = 0 ;
@@ -22,6 +22,10 @@ void move_next_window () {
 
 	if ( n > 4 ) n = 0 ;
 	active_window  = n ;
+
+#ifdef DEBUG
+					uart_debug ( 3 , " active_window = ", active_window ) ;
+#endif
 
 }
 
@@ -54,7 +58,7 @@ void prepare_next_screen() {
 void out_screen( uint8_t n ){
 	// физический уровень вывода
 
-	extern uint8_t errno ;
+	//extern uint8_t errno ;
 	extern MenuStruct paint[5] ;
 
 	if ( (n >= 0) && ( n < 5 ) )

@@ -57,9 +57,18 @@ typedef enum
 {
     main_READY,                 /*!< Startup finished. */
     key_PRESSED,          		/*!< change screen. */
+	key_RELEASED,
     uart_RECIEVED,				/*!< Execute send*/
     mon_REFRESH              	/*!< Execute refresh display. */
 } mainEventType;
+
+typedef enum
+{
+	key_RELEAS,
+	key_PRESS
+
+} keyStatusType ;
+
 
 //mainEventType main_Event = 0 ;
 

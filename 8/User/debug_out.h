@@ -10,9 +10,12 @@
 
 #include "stdio.h"
 #include "stdarg.h"
-
+#include "usart1.h"
+#include "string.h"
 
 int sum ( int s1 , ... );
+
+void uart_debug (int s1, ... ) ; // через один текст и целое
 
 
 #endif /* DEBUG_OUT_H_ */

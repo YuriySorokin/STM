@@ -12,12 +12,15 @@
 #include "data.h"
 #include "main.h"
 #include "user.h"
-
+#include "debug_out.h"
 
 
 void	get_current_screen(uint8_t*);
 void	prepare_next_screen(void);
 void	out_screen(uint8_t);
 void    print_screen(void) ;
+
+
+void move_next_window (void ) ;
 
 #endif //SRC_SCREEN_H_

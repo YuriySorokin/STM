@@ -19,7 +19,7 @@
 #include "power.h"
 #include "timer.h"
 #include "screen.h"
-
+#include "main.h"
 
 //#include "fonts.h"
 
@@ -29,7 +29,7 @@
 //#include "font12.c"
 //#include "font8.c"
 
-
+// #define DEBUGuart
 
 //-------------------------------------------------------------------
 typedef struct
@@ -42,8 +42,8 @@ typedef struct
 LCD_DrawPropTypeDef lcdprop;
 
 //------------------------------------------------
-
 uint16_t TFT9341_WIDTH = 240;
+
 uint16_t TFT9341_HEIGHT = 320;
 
 void TFT9341_FontsIni(void)
@@ -546,6 +546,10 @@ void start(void)
 	//extern mainEventType main_Event = 0 ;
 
 	float  battery_value  = 0 ;
+	extern mainEventType main_Event ;
+	extern keyStatusType key ;
+	extern uint32_t FlagIRQ ;
+
 
 	Leds_flash_on_start_led1_led2();
 
@@ -600,20 +604,101 @@ void start(void)
 		   // HAL_PWR_EnterSLEEPMode(PWR_LOWPOWERREGULATOR_ON, PWR_SLEEPENTRY_WFI);
 	//}
 
-		extern 		 mainEventType main_Event ;
+		main_Event = main_READY ;
+		FlagIRQ = 0 ;
+		uint8_t was = 0 ;
 
+		while (1) {
+
+			switch ( main_Event ) {
+				case  main_READY : {
+					if (!was) {
+
+						was++ ;
+
+#ifdef DEBUGuart
+uart_debug ( 3 , "FlagIRQ = ", FlagIRQ ) ;
+#endif
+					}
+
+					if ( FlagIRQ > 0 )
+						{
+
+							main_Event = key_PRESSED ;
+
+#ifdef DEBUGuart
+uart_debug ( 3 , " main_Event = ", main_Event ) ;
+#endif
+
+							move_next_window () ;
+
+							print_screen() ;
+							main_Event = main_READY ;
+
+							FlagIRQ-- ;
+						}
+
+				} break ;
+
+				case  key_PRESSED : {
+
+
+				} break ;
+
+
+				case  key_RELEASED : {} break ;
+				case  uart_RECIEVED : {} break ;
+				case  mon_REFRESH : {} break ;
+				default : break ;
+			}
+
+
+
+		}
+
+
+
+
+
+		main_Event = main_READY ;
 
 		while ( 1 ) {
+
+			switch ( key ) {
+			case key_PRESS: {
+					main_Event = key_PRESSED ;
+
+				}
+				break ;
+			case key_RELEAS: {
+					main_Event = main_READY ;
+
+				}
+				break ;
+
+			default : break ;
+
+			}
+
 
 				switch ( main_Event )
 					{
 					case main_READY: {
 
+							//	main_Event = key_RELEASED ;
 							}
 							break;
 
 					case key_PRESSED:{
-								move_next_window () ; main_Event = mon_REFRESH ;
+
+#ifdef DEBUG
+								uart_debug ( 3 , "main_event = ", main_Event ) ;
+#endif
+								move_next_window () ;
+								print_screen() ;
+								key = key_RELEAS ;
+								main_Event = main_READY ;
+
 							}
 							break;
 
