@@ -23,7 +23,7 @@ void move_next_window (void) {
 	if ( n > 4 ) n = 0 ;
 	active_window  = n ;
 
-#ifdef DEBUG
+#ifdef DEBUGuart
 					uart_debug ( 3 , " active_window = ", active_window ) ;
 #endif
 

@@ -1,3 +1,6 @@
+
+//#define DEBUGuart
+
 /*
  * user.c
  *
@@ -636,6 +639,7 @@ uart_debug ( 3 , " main_Event = ", main_Event ) ;
 							main_Event = main_READY ;
 
 							FlagIRQ-- ;
+							was-- ;
 						}
 
 				} break ;
