@@ -547,7 +547,7 @@ void start(void)
 
 	float  battery_value  = 0 ;
 	extern mainEventType main_Event ;
-	extern keyStatusType key ;
+
 	extern uint32_t FlagIRQ ;
 
 
@@ -656,64 +656,6 @@ uart_debug ( 3 , " main_Event = ", main_Event ) ;
 
 		}
 
-
-
-
-
-		main_Event = main_READY ;
-
-		while ( 1 ) {
-
-			switch ( key ) {
-			case key_PRESS: {
-					main_Event = key_PRESSED ;
-
-				}
-				break ;
-			case key_RELEAS: {
-					main_Event = main_READY ;
-
-				}
-				break ;
-
-			default : break ;
-
-			}
-
-
-				switch ( main_Event )
-					{
-					case main_READY: {
-
-							//	main_Event = key_RELEASED ;
-							}
-							break;
-
-					case key_PRESSED:{
-
-#ifdef DEBUG
-								uart_debug ( 3 , "main_event = ", main_Event ) ;
-#endif
-								move_next_window () ;
-								print_screen() ;
-								key = key_RELEAS ;
-								main_Event = main_READY ;
-
-							}
-							break;
-
-					case uart_RECIEVED: {
-
-								}
-							break;
-
-					case mon_REFRESH: {
-										print_screen() ; main_Event = main_READY ;
-									}
-							break;
-					default : break ;
-					}
-			}
 	}
 
 void Dispaly_init(void){
