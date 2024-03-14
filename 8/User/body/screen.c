@@ -9,6 +9,8 @@
 
 
 extern uint8_t active_window ;
+mainEventType main_Event ;
+uint32_t FlagIRQ = 0  ;
 
 
 void move_next_window (void) {
@@ -79,3 +81,61 @@ void out_screen( uint8_t n ){
 }
 
 
+void poll_screen (void){
+
+	main_Event = main_READY ;
+	//FlagIRQ = 0 ;
+	uint8_t was = 0 ;
+
+	while ( FlagIRQ ) {
+
+		switch ( main_Event ) {
+			case  main_READY : {
+				if (!was) {
+
+					was++ ;
+
+#ifdef DEBUGuart
+uart_debug ( 3 , "FlagIRQ = ", FlagIRQ ) ;
+#endif
+				}
+
+				if ( FlagIRQ > 0 )
+					{
+
+						main_Event = key_PRESSED ;
+
+#ifdef DEBUGuart
+uart_debug ( 3 , " main_Event = ", main_Event ) ;
+#endif
+
+						move_next_window () ;
+
+						print_screen() ;
+						main_Event = main_READY ;
+
+
+
+						FlagIRQ-- ;
+						was-- ;
+					}
+
+			} break ;
+
+			case  key_PRESSED : {
+
+
+			} break ;
+
+
+			case  key_RELEASED : {} break ;
+			case  uart_RECIEVED : {} break ;
+			case  mon_REFRESH : {} break ;
+			default : break ;
+		}
+
+
+
+	}
+
+}

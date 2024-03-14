@@ -67,8 +67,11 @@ void delay_Led_on( uint32_t Delay ) {
 	Led_green_on();
 
   	for ( uint32_t i = Delay ; i < Delay ; i++)  {
-  		LedOn();
+
+  		Led_green_on();
+
   	}
+  	Led_green_off() ;
 }
 
 void delay_Led_Green_on( uint32_t Delay ) {

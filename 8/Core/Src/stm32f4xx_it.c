@@ -26,10 +26,10 @@
 #include "power.h"
 #include "user.h"
 
- mainEventType main_Event ;
+
  keyStatusType key =  key_RELEAS;
 
- uint32_t FlagIRQ = 0 ;
+ extern uint32_t FlagIRQ ;
 
 /* USER CODE END Includes */
 

@@ -13,6 +13,7 @@ void Uart_Send_Recive(void);
 void Uart_Receive_IRQ_DMA(void);
 void Uart_transmit(char*);
 void Uart_transmit_IT(char * );
+void user_MX_USART1_UART_reInit( uint32_t  ) ; // uart на modbus
 
 
 void print_comm3( char* );

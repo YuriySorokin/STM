@@ -41,6 +41,12 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#define REG_INPUT_START 1000
+#define REG_INPUT_NREGS 8
+
+
+
+
 
 /* USER CODE END Includes */
 

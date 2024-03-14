@@ -1,4 +1,3 @@
-// #define DEBUGuart
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
@@ -40,6 +39,8 @@
 #include "user.h"
 #include "mb.h"
 #include "mt_port.h"
+#include "modbus_user.h"
+#include "screen.h"
 
 /* USER CODE END Includes */
 
@@ -50,10 +51,9 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define REG_INPUT_START 1000
-#define REG_INPUT_NREGS 8
 
-
+//extern USHORT usRegInputStart ;
+//extern USHORT usRegInputBuf[];
 
 
 /* USER CODE END PD */
@@ -73,8 +73,6 @@ uint8_t active_window = 0 ;
 
 
 
-static USHORT usRegInputStart = REG_INPUT_START;
-static USHORT usRegInputBuf[REG_INPUT_NREGS] = {'M', 'o', 'd', 'b', 'u', 's', 0x0, 0x0};
 
 //TIM_HandleTypeDef htim1;
 
@@ -138,9 +136,10 @@ int main(void)
 // ================ init Modbus ===================
 
   MT_PORT_SetTimerModule(&htim3);
-  MT_PORT_SetUartModule(&huart1);
 
   eMBErrorCode eStatus;
+  MT_PORT_SetUartModule(&huart1);
+
   eStatus = eMBInit(MB_RTU, 0x0A, 0, 9600, MB_PAR_NONE);
   eStatus = eMBEnable();
   if (eStatus != MB_ENOERR)
@@ -151,11 +150,22 @@ int main(void)
   // ================ END init Modbus ===================
   HAL_TIM_Base_Start_IT(&htim1);
 
-   start();
+   start(); // welcome screen
+
  // 	  start2 ();
+	  //print_text_Line2_F1();
+	  // DrawMenu ( 1 );
+	  // get_time_to_comm();
+
 
    //eMBPoll();
+   while (1) {
 
+	   poll_screen(); // poll screen by button
+
+	   poll_modbus(); // poll modbus in whle
+
+   }
 
   /* USER CODE END 2 */
 
@@ -164,19 +174,11 @@ int main(void)
   while (1)
   {
 
-	  //print_text_Line2_F1();
-	  // DrawMenu ( 1 );
-	  // get_time_to_comm();
 
     /* USER CODE END WHILE */
     MX_USB_HOST_Process();
 
     /* USER CODE BEGIN 3 */
-    eMBPoll();
-       usRegInputBuf[REG_INPUT_NREGS - 2] =  HAL_GetTick() / 1000;
-       usRegInputBuf[REG_INPUT_NREGS - 1] =  HAL_GetTick();
-      // HAL_Delay (3);
-
   }
   /* USER CODE END 3 */
 }
@@ -228,51 +230,6 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
-// ==================== Modbus Begin
-
-/*----------------------------------------------------------------------------*/
-eMBErrorCode eMBRegInputCB(UCHAR * pucRegBuffer, USHORT usAddress, USHORT usNRegs)
-{
-  eMBErrorCode eStatus = MB_ENOERR;
-  int iRegIndex;
-  if ((usAddress >= REG_INPUT_START) &&
-      (usAddress + usNRegs <= REG_INPUT_START + REG_INPUT_NREGS))
-  {
-    iRegIndex = (int)(usAddress - usRegInputStart);
-    while(usNRegs > 0)
-    {
-        *pucRegBuffer++ = (unsigned char)(usRegInputBuf[iRegIndex] >> 8);
-        *pucRegBuffer++ = (unsigned char)(usRegInputBuf[iRegIndex] & 0xFF);
-        iRegIndex++;
-        usNRegs--;
-    }
-  }
-  else
-  {
-    eStatus = MB_ENOREG;
-  }
-  return eStatus;
-}
-
-/*----------------------------------------------------------------------------*/
-eMBErrorCode eMBRegHoldingCB(UCHAR * pucRegBuffer, USHORT usAddress, USHORT usNRegs,
-                             eMBRegisterMode eMode)
-{
-  return MB_ENOREG;
-}
-
-
-eMBErrorCode eMBRegCoilsCB(UCHAR * pucRegBuffer, USHORT usAddress, USHORT usNCoils,
-                           eMBRegisterMode eMode)
-{
-  return MB_ENOREG;
-}
-/*----------------------------------------------------------------------------*/
-eMBErrorCode eMBRegDiscreteCB(UCHAR * pucRegBuffer, USHORT usAddress, USHORT usNDiscrete)
-{
-  return MB_ENOREG;
-}
-// ==================== Modbus END
 
 
 

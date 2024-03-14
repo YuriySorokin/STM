@@ -9,8 +9,11 @@
 #include "user.h"
 #include "usart1.h"
 #include "LED.h"
+#include "data.h"
+#include "mb.h"
 
 uint32_t D = 0 ;
+extern Menu_Data Datamenu;
 
 
 void transmitUSART_Transmit (void){
@@ -225,3 +228,47 @@ void Uart_Send_Recive(void){
 	  D = 1;
   }
 */
+void system_reconfig( ){
+
+	// переинициализировать uart
+	Datamenu.net_RS_speed = 19200 ;
+
+	user_MX_USART1_UART_reInit( (uint32_t)Datamenu.net_RS_speed ); // uart на modbus
+
+}
+
+void user_MX_USART1_UART_reInit( uint32_t baudrate ) // uart на modbus
+{
+	eMBErrorCode eStatus;
+
+	 HAL_UART_DeInit( &huart1);
+
+	 /* USER CODE END USART1_Init 1 */
+	  huart1.Instance = USART1;
+	  huart1.Init.BaudRate = baudrate;
+	  huart1.Init.WordLength = UART_WORDLENGTH_8B;
+	  huart1.Init.StopBits = UART_STOPBITS_1;
+	  huart1.Init.Parity = UART_PARITY_NONE;
+	  huart1.Init.Mode = UART_MODE_TX_RX;
+	  huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+	  huart1.Init.OverSampling = UART_OVERSAMPLING_16;
+
+
+	  if (HAL_UART_Init(&huart1) != HAL_OK)
+	  {
+	    Error_Handler();
+	  }
+
+	  MT_PORT_SetUartModule(&huart1);
+
+	  eStatus = eMBDisable( );
+
+	  eStatus = eMBInit(MB_RTU, 0x0A, 0, baudrate, MB_PAR_NONE);
+
+	  eStatus = eMBEnable();
+	  if (eStatus != MB_ENOERR)
+	  {
+	  // Error handling
+	  }
+
+}

@@ -25,6 +25,14 @@ void fill_string(uint8_t* destString, uint8_t* string ){
 	      while ((*destString++ = *string++) != '\0');
 }
 
+/*
+ *
+ * данные меню
+ *
+ *
+ * */
+
+
 void fill_menu_data (void){
 
 	//uint8_t count_size = 0;
@@ -59,6 +67,14 @@ void fill_menu_data (void){
 	//&Datamenu ;
 
 }
+
+
+/*
+ * Расположение полей настроечного меню
+ *
+ *
+ * */
+
 
 void fill_menu_init (void) {
 
@@ -127,4 +143,5 @@ void fill_menu_init (void) {
 		paint[4].pos_z_x[1] = 1+10 ;
 		paint[4].pos_z_y[1] = 25 ;
 }
+
 

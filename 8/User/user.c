@@ -558,6 +558,11 @@ void start(void)
 
 	Display_welcomeScreen();
 
+	fill_menu_init() ;
+	fill_menu_data();
+
+	print_screen();
+
 	Get_Usonic_distance();
 
 	set_Date(29,02,24);
@@ -581,6 +586,9 @@ void start(void)
 //		get_time_to_comm();
 	fill_menu_init() ;
 	fill_menu_data();
+
+
+
 	print_screen();
 
 
@@ -607,58 +615,7 @@ void start(void)
 		   // HAL_PWR_EnterSLEEPMode(PWR_LOWPOWERREGULATOR_ON, PWR_SLEEPENTRY_WFI);
 	//}
 
-		main_Event = main_READY ;
-		FlagIRQ = 0 ;
-		uint8_t was = 0 ;
 
-		while (1) {
-
-			switch ( main_Event ) {
-				case  main_READY : {
-					if (!was) {
-
-						was++ ;
-
-#ifdef DEBUGuart
-uart_debug ( 3 , "FlagIRQ = ", FlagIRQ ) ;
-#endif
-					}
-
-					if ( FlagIRQ > 0 )
-						{
-
-							main_Event = key_PRESSED ;
-
-#ifdef DEBUGuart
-uart_debug ( 3 , " main_Event = ", main_Event ) ;
-#endif
-
-							move_next_window () ;
-
-							print_screen() ;
-							main_Event = main_READY ;
-
-							FlagIRQ-- ;
-							was-- ;
-						}
-
-				} break ;
-
-				case  key_PRESSED : {
-
-
-				} break ;
-
-
-				case  key_RELEASED : {} break ;
-				case  uart_RECIEVED : {} break ;
-				case  mon_REFRESH : {} break ;
-				default : break ;
-			}
-
-
-
-		}
 
 	}
 
