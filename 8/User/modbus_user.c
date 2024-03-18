@@ -24,7 +24,6 @@ void poll_modbus (void)
 	{
 			eMBPoll();
 
-
 				usRegInputBuf[REG_INPUT_NREGS - 2] =  HAL_GetTick() / 1000;
 				usRegInputBuf[REG_INPUT_NREGS - 1] =  HAL_GetTick();
 

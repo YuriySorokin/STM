@@ -32,7 +32,6 @@
 #include "usart.h"
 #include "usb_host.h"
 #include "gpio.h"
-#include "fmc.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -70,7 +69,7 @@ RTC_HandleTypeDef rtcHandle;
 
 uint8_t errno = 0 ;
 uint8_t active_window = 0 ;
-
+uint32_t timeoutI2C;
 
 
 
@@ -122,8 +121,6 @@ int main(void)
   MX_DMA_Init();
   MX_CRC_Init();
   MX_DMA2D_Init();
-  MX_FMC_Init();
-  MX_I2C3_Init();
   MX_SPI5_Init();
   MX_TIM1_Init();
   MX_USART1_UART_Init();
@@ -131,9 +128,13 @@ int main(void)
   MX_RTC_Init();
   MX_ADC1_Init();
   MX_TIM3_Init();
+  MX_I2C2_Init();
   /* USER CODE BEGIN 2 */
   //HAL_RTC_MspInit( &rtcHandle);
 // ================ init Modbus ===================
+
+
+  SSD1306_Init();
 
   MT_PORT_SetTimerModule(&htim3);
 
@@ -161,9 +162,12 @@ int main(void)
    //eMBPoll();
    while (1) {
 
+
 	   poll_screen(); // poll screen by button
+	   print_window_screen_SSD(active_window);
 
 	   poll_modbus(); // poll modbus in whle
+
 
    }
 

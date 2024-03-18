@@ -23,7 +23,8 @@
 #include "timer.h"
 #include "screen.h"
 #include "main.h"
-
+#include "ssd1306.h"
+#include "stdio.h"
 //#include "fonts.h"
 
 //#include "font24.c"
@@ -201,6 +202,7 @@ static void TFT9341_WriteData(uint8_t* buff, size_t buff_size) {
 		uint16_t chunk_size = buff_size > 32768 ? 32768 : buff_size;
 		HAL_SPI_Transmit(&hspi5, buff, chunk_size, HAL_MAX_DELAY);
 		//HAL_SPI_Transmit_DMA( &hspi5, buff, chunk_size) ;
+		//HAL_Delay (1);
 		buff += chunk_size;
 		buff_size -= chunk_size;
 	}
@@ -242,23 +244,27 @@ void TFT9341_ini(uint16_t w_size, uint16_t h_size)
   data[4] = 0x02;
   TFT9341_SendCommand(0xCB);
   TFT9341_WriteData(data, 5);
+  HAL_Delay (1);
   //Power Control B
   data[0] = 0x00;
   data[1] = 0xC1;
   data[2] = 0x30;
   TFT9341_SendCommand(0xCF);
   TFT9341_WriteData(data, 3);
+  HAL_Delay (1);
   //Driver timing control A
   data[0] = 0x85;
   data[1] = 0x00;
   data[2] = 0x78;
   TFT9341_SendCommand(0xE8);
   TFT9341_WriteData(data, 3);
+  HAL_Delay (1);
   //Driver timing control B
   data[0] = 0x00;
   data[1] = 0x00;
   TFT9341_SendCommand(0xEA);
   TFT9341_WriteData(data, 2);
+  HAL_Delay (1);
   //Power on Sequence control
   data[0] = 0x64;
   data[1] = 0x03;
@@ -266,54 +272,66 @@ void TFT9341_ini(uint16_t w_size, uint16_t h_size)
   data[3] = 0x81;
   TFT9341_SendCommand(0xED);
   TFT9341_WriteData(data, 4);
+  HAL_Delay (1);
   //Pump ratio control
   data[0] = 0x20;
   TFT9341_SendCommand(0xF7);
   TFT9341_WriteData(data, 1);
+  HAL_Delay (1);
   //Power Control,VRH[5:0]
   data[0] = 0x10;
   TFT9341_SendCommand(0xC0);
   TFT9341_WriteData(data, 1);
+  HAL_Delay (1);
   //Power Control,SAP[2:0];BT[3:0]
   data[0] = 0x10;
   TFT9341_SendCommand(0xC1);
   TFT9341_WriteData(data, 1);
+  HAL_Delay (1);
   //VCOM Control 1
   data[0] = 0x3E;
   data[1] = 0x28;
   TFT9341_SendCommand(0xC5);
   TFT9341_WriteData(data, 2);
+  HAL_Delay (1);
   //VCOM Control 2
   data[0] = 0x86;
   TFT9341_SendCommand(0xC7);
   TFT9341_WriteData(data, 1);
+  HAL_Delay (1);
   //Memory Acsess Control
   data[0] = 0x48;
   TFT9341_SendCommand(0x36);
   TFT9341_WriteData(data, 1);
+  HAL_Delay (1);
   //Pixel Format Set
   data[0] = 0x55;//16bit
   TFT9341_SendCommand(0x3A);
   TFT9341_WriteData(data, 1);
+  HAL_Delay (1);
   //Frame Rratio Control, Standard RGB Color
   data[0] = 0x00;
   data[1] = 0x18;
   TFT9341_SendCommand(0xB1);
   TFT9341_WriteData(data, 2);
+  HAL_Delay (1);
   //Display Function Control
   data[0] = 0x08;
   data[1] = 0x82;
   data[2] = 0x27;//320 строк
   TFT9341_SendCommand(0xB6);
   TFT9341_WriteData(data, 3);
+  HAL_Delay (1);
   //Enable 3G (пока не знаю что это за режим)
   data[0] = 0x00;//не включаем
   TFT9341_SendCommand(0xF2);
   TFT9341_WriteData(data, 1);
+  HAL_Delay (1);
   //Gamma set
   data[0] = 0x01;//Gamma Curve (G2.2) (Кривая цветовой гаммы)
   TFT9341_SendCommand(0x26);
   TFT9341_WriteData(data, 1);
+  HAL_Delay (1);
   //Positive Gamma  Correction
   data[0] = 0x0F;
   data[1] = 0x31;
@@ -332,6 +350,7 @@ void TFT9341_ini(uint16_t w_size, uint16_t h_size)
   data[14] = 0x00;
   TFT9341_SendCommand(0xE0);
   TFT9341_WriteData(data, 15);
+  HAL_Delay (1);
   //Negative Gamma  Correction
   data[0] = 0x00;
   data[1] = 0x0E;
@@ -350,6 +369,7 @@ void TFT9341_ini(uint16_t w_size, uint16_t h_size)
   data[14] = 0x0F;
   TFT9341_SendCommand(0xE1);
   TFT9341_WriteData(data, 15);
+  HAL_Delay (1);
   TFT9341_SendCommand(0x11);//Выйдем из спящего режима
   HAL_Delay(240);
 	  //Display ON
@@ -549,14 +569,17 @@ void start(void)
 	//extern mainEventType main_Event = 0 ;
 
 	float  battery_value  = 0 ;
-	extern mainEventType main_Event ;
 
-	extern uint32_t FlagIRQ ;
+
+	//extern uint32_t FlagIRQ ;
 
 
 	Leds_flash_on_start_led1_led2();
 
 	Display_welcomeScreen();
+
+
+	print_test_screen_SSD ();
 
 	fill_menu_init() ;
 	fill_menu_data();
@@ -614,7 +637,6 @@ void start(void)
 
 		   // HAL_PWR_EnterSLEEPMode(PWR_LOWPOWERREGULATOR_ON, PWR_SLEEPENTRY_WFI);
 	//}
-
 
 
 	}

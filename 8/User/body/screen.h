@@ -13,7 +13,7 @@
 #include "main.h"
 #include "user.h"
 #include "debug_out.h"
-
+#include "ssd1306.h"
 
 void
 get_current_screen(uint8_t*);

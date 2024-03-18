@@ -18,7 +18,6 @@ void move_next_window (void) {
 	 // от 0 до 4
 	uint8_t  n = 0 ;
 
-
 	n = active_window ;
 	n++ ;
 
@@ -69,11 +68,11 @@ void out_screen( uint8_t n ){
 		TFT9341_SetBackColor(TFT9341_BLACK);
 		TFT9341_SetFont(&Font24);
 
-    // clear
+    // clear string
     	TFT9341_String( paint[n].pos_n_x[0], paint[n].pos_n_y[0], "               ");
 
     	TFT9341_String( paint[n].pos_n_x[0], paint[n].pos_n_y[0], paint[n].name);
-
+    // clear string
     	TFT9341_String( paint[n].pos_z_x[0], paint[n].pos_z_y[0], "               ");
 
     	TFT9341_String( paint[n].pos_z_x[0], paint[n].pos_z_y[0], paint[n].znach);

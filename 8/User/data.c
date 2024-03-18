@@ -81,15 +81,15 @@ void fill_menu_init (void) {
 	// 1
 	paint[0].frame_n = 1 ;			// рабочий номер окна
 
-	strcpy(paint[0].name, "Time menu One" ) ; // наименование
+	strcpy(paint[0].name, "Baudrate : " ) ; // наименование
 
 	paint[0].pos_n[0] = 1  ;
 	paint[0].pos_n_x[0] = 1 ;
 	paint[0].pos_n_y[0] = 25 ;
 
-	paint[0].pos_z[1] = 11 ;
-	paint[0].pos_z_x[1] = 1+10 ;
-	paint[0].pos_z_y[1] = 25 ;
+	paint[0].pos_z[0] = 11 ;
+	paint[0].pos_z_x[0] = 1+100 ;
+	paint[0].pos_z_y[0] = 25 ;
 
 	// 2
 	paint[1].frame_n = 2 ;
